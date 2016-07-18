@@ -6,17 +6,24 @@ function Noun(meaning, dictEntry, types, chapter, section){
 	this.firstDict = dictEntry.trim().match(/^[a-zA-Z]+(?=,)/).join();
 	//Order Matters.  Gender must be in front of Declension to remove any of the info.
 	//For words that don't have a declared gender those are dealt with under the declension section.
-	console.log(this.firstDict);
 	this.gender = getGender();
-		console.log(this.gender);
 	this.declension = getDeclension();
-		console.log(this.declension);
 	this.stem = getStem();
-		console.log(this.stem);
 	this.meaning = meaning.trim();
 	this.types = types;
 	this.chapter = chapter.trim();
 	this.section = section;
+
+function test(x){
+	if(x === undefined){
+		console.log(self);
+	}
+}
+	test(this.firstDict);
+	test(this.gender);
+	test(this.declension);
+	test(this.stem);
+
 
 	function getGender(){
 	  //this.gender = undefined;
@@ -49,7 +56,9 @@ function Noun(meaning, dictEntry, types, chapter, section){
 		//clean the data from extra spaces at the end
 		dictEntry = dictEntry.trim();
 		//check endings to get undefined genders and declensions
-		if(dictEntry.match(/ei$/)){return '5th';}
+		if(dictEntry.match(/ei$/)){
+			if(self.gender === undefined){self.gender = 'F';}
+			return '5th';}
 		if(dictEntry.match(/i$/)){
 			//if the gender was not stated in the dictionary entry pull it from the default types of declensions
 			if(self.gender === undefined){
