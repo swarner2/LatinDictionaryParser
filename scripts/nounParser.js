@@ -56,7 +56,6 @@ function test(x){
 	function getDeclension(){
 		//clean the data from extra spaces at the end
 		dictEntry = dictEntry.trim();
-		console.log(dictEntry)
 		//check endings to get undefined genders and declensions
 		if(dictEntry.match(/ei$/)){
 			if(self.gender === undefined){self.gender = 'F';}
@@ -99,6 +98,9 @@ function test(x){
 		}
 		if(self.declension === '4th'){
 			return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
+		}
+		if(self.declension === '3rd'){
+			return dictEntry.match(/\s[a-zA-Z]+(?=is)/i).join();
 		}
 	}
 }
