@@ -2,29 +2,7 @@ function Noun(meaning, dictEntry, types, chapter, section){
 	this.firstDict = dictEntry.trim().match(/^[a-zA-Z]+(?=,)/).join();
 	//Order Matters.  Gender must be in front of Declension to remove any of the info.
 	//For words that don't have a declared gender those are dealt with under the declension section.
-	this.gender = undefined;
-		dictEntry = dictEntry.replace(/\(/, '');
-		dictEntry = dictEntry.replace(/\)/, '');
-			if(dictEntry.match(/m\/f$/i)){
-				this.gender = 'C';
-				dictEntry = dictEntry.replace(/ m\/f$/i, '' );
-			}
-			if(dictEntry.match(/m$/i)){
-				this.gender = 'M';
-				dictEntry = dictEntry.replace(/ m$/i,'' );
-			}
-			if(dictEntry.match(/f$/i)){
-				this.gender = 'F';
-				dictEntry = dictEntry.replace(/ f$/i,'' );
-			}
-			if(dictEntry.match(/n$/i)){
-				this.genderder = 'N';
-				dictEntry = dictEntry.replace(/ n$/i,'' );
-			}
-			if(dictEntry.match(/c$/i)){
-				this.gender = 'C';
-				dictEntry = dictEntry.replace(/ c$/i,'' );
-			}
+	this.gender = getGender(dictEntry);
 	this.declension = undefined;
 		if(dictEntry.match(/i$/)){
 			this.declension = '2nd';
