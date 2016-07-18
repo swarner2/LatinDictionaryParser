@@ -30,6 +30,7 @@ function test(x){
 	    //clean up the parentheses if there are any
 	    dictEntry = dictEntry.replace(/\(/, '');
 	    dictEntry = dictEntry.replace(/\)/, '');
+			dictEntry = dictEntry.trim();
 	    //check to see if both masculine and feminine are given for common gender
 	      if(dictEntry.match(/m\/f$/i)){
 	        dictEntry = dictEntry.replace(/ m\/f$/i, '' );
@@ -55,6 +56,7 @@ function test(x){
 	function getDeclension(){
 		//clean the data from extra spaces at the end
 		dictEntry = dictEntry.trim();
+		console.log(dictEntry)
 		//check endings to get undefined genders and declensions
 		if(dictEntry.match(/ei$/)){
 			if(self.gender === undefined){self.gender = 'F';}
