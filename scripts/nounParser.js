@@ -1,5 +1,8 @@
 function Noun(meaning, dictEntry, types, chapter, section){
+	console.log('.............................................NEW WORD');
 	var self = this;
+	//clean up dictEntry
+	dictEntry = dictEntry.replace(" ,", ",");
 	this.firstDict = dictEntry.trim().match(/^[a-zA-Z]+(?=,)/).join();
 	//Order Matters.  Gender must be in front of Declension to remove any of the info.
 	//For words that don't have a declared gender those are dealt with under the declension section.
