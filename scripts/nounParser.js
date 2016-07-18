@@ -92,5 +92,11 @@ function test(x){
 		if(self.declension === '1st'){
 			return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 		}
+		if(self.declension === '5th'){
+			return dictEntry.match(/[a-zA-Z]+(?=es,)/i).join();
+		}
+		if(self.declension === '4th'){
+			return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
+		}
 	}
 }
