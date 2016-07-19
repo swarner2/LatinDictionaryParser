@@ -79,7 +79,12 @@ function test(x){
 			return '4th';
 		}
 		if(dictEntry.match(/orum$/)){
-			self.gender = 'N';
+			if (self.firstDict.match(/i$/)) {
+				self.gender = 'M';
+			}
+			else{
+				self.gender = 'N';
+			}
 			self.pluralOnly = true;
 			return '2nd';}
 		if(dictEntry.match(/arum$/)){
@@ -98,7 +103,8 @@ function test(x){
 			if(dictEntry.match(/[a-z](?=,)/).join() === 'r') {
 				return dictEntry.match(/[a-zA-Z]+(?=,)/);
 			}
-			else if(self.gender === 'M'){
+			//note that there are a few 2nd declension words that are Feminine
+			else if(self.gender === 'M' || self.gender === 'F'){
 				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
 			}
 			else if(self.pluralOnly){
