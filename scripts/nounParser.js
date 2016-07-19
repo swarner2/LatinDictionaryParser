@@ -1,5 +1,4 @@
 function Noun(meaning, dictEntry, types, chapter, section){
-	console.log('.............................................NEW WORD');
 	var self = this;
 	//clean up dictEntry
 	dictEntry = dictEntry.replace(" ,", ",");
@@ -75,6 +74,10 @@ function test(x){
 		}
 		if(dictEntry.match(/is$/)){return '3rd';}
 		if(dictEntry.match(/us$/)){return '4th';}
+		if(dictEntry.match(/orum$/)){
+			self.gender = 'N';
+			self.pluralOnly = true;
+			return '2nd';}
 	}
 	function getStem(){
 		if(self.declension === '2nd'){
@@ -85,6 +88,9 @@ function test(x){
 			}
 			else if(self.gender === 'M'){
 				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
+			}
+			else if(self.pluralOnly){
+				return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 			}
 			else{
 				return dictEntry.match(/[a-zA-Z]+(?=um,)/i).join();

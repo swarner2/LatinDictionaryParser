@@ -39,7 +39,7 @@ dictionary = {
     asinus	:  new Noun	("	donkey	","	asinus, -i	",["	animal	"], "	X	",	1	),
     atrium	:  new Noun	("	main room, hall	","	atrium, i	",["	place	"], "	V	",	1	),
     audacia	:  new Noun	("	boldness	","	audacia, -ae	",["	attribute	"], "	XXXII	",	1	),
-    auriga	:  new Noun	("	charioteer, driver	","	auriga, -ae <	",["	person	"], "	XXXIIII	",	1	),
+    auriga	:  new Noun	("	charioteer, driver	","	auriga, -ae M	",["	person	"], "	XXXIIII	",	1	),
     auris	:  new Noun	("	ear	","	auris, auris (F)	",["	body part	"], "	XI	",	1	),
     aurum	:  new Noun	("	gold	","	aurum, -i	",["	material	"], "	XXII	",	1	),
     autumnus	:  new Noun	("	fall (season)	","	autumnus, i	",["	time	"], "	XIII	",	2	),
