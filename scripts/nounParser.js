@@ -16,7 +16,7 @@ function Noun(meaning, dictEntry, types, chapter, section){
 function test(x){
 	if(x === undefined){
 		console.log(self);
-		self.meaning = 'something was not defined, check how you entered the data for this word to fix it'
+		self.meaning = 'something was not defined, check how you entered the data for this word to fix it';
 	}
 }
 	test(this.firstDict);
@@ -33,27 +33,28 @@ function test(x){
 			dictEntry = dictEntry.trim();
 	    //check to see if both masculine and feminine are given for common gender
 	      if(dictEntry.match(/m\/f$/i)){
-	        dictEntry = dictEntry.replace(/ m\/f$/i, '' );
+	        dictEntry = dictEntry.replace(/\sm\/f$/i, '' );
 	        return 'C';
 	      }
 	      if(dictEntry.match(/c$/i)){
-	        dictEntry = dictEntry.replace(/ c$/i,'' );
+	        dictEntry = dictEntry.replace(/\sc$/i,'' );
 	        return 'C';
 	      }
 	      if(dictEntry.match(/m$/i)){
-	        dictEntry = dictEntry.replace(/ m$/i,'' );
+	        dictEntry = dictEntry.replace(/\sm$/i,'' );
 	        return 'M';
 	      }
 	      if(dictEntry.match(/f$/i)){
-	        dictEntry = dictEntry.replace(/ f$/i,'' );
+	        dictEntry = dictEntry.replace(/\sf$/i,'' );
 	        return 'F';
 	      }
 	      if(dictEntry.match(/n$/i)){
-	        dictEntry = dictEntry.replace(/ n$/i,'' );
+	        dictEntry = dictEntry.replace(/\sn$/i,'' );
 	        return 'N';
 	      }
 	}
 	function getDeclension(){
+
 		//clean the data from extra spaces at the end
 		dictEntry = dictEntry.trim();
 		//check endings to get undefined genders and declensions
