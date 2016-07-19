@@ -38,6 +38,7 @@ function test(x){
 	      }
 	      if(dictEntry.match(/c$/i)){
 	        dictEntry = dictEntry.replace(/\sc$/i,'' );
+
 	        return 'C';
 	      }
 	      if(dictEntry.match(/m$/i)){
@@ -143,6 +144,9 @@ function test(x){
 				return self.firstDict.match(/[a-zA-Z]+(?=is)/i).join();
 			}
 			if(self.pluralOnly){
+				if(dictEntry.match(/\s[a-zA-Z]+(?=um)/i) === null){
+					return self.firstDict.match(/[a-zA-Z]+(?=es)/i).join();
+				}
 				return dictEntry.match(/\s[a-zA-Z]+(?=um)/i).join();
 			}
 			//this is the standard place to get the stem, the second part of the dictEntry
