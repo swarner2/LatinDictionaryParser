@@ -1,5 +1,4 @@
 function Noun(meaning, dictEntry, types, chapter, section){
-	console.log(dictEntry)
 	var self = this;
 	//clean up dictEntry
 	dictEntry = dictEntry.replace(" ,", ",");
@@ -17,6 +16,7 @@ function Noun(meaning, dictEntry, types, chapter, section){
 function test(x){
 	if(x === undefined){
 		console.log(self);
+		self.meaning = 'something was not defined, check how you entered the data for this word to fix it'
 	}
 }
 	test(this.firstDict);
