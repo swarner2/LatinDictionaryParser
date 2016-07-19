@@ -517,7 +517,7 @@ dictionary = {
     venter	:  new Noun	("	stomach	","	venter, ventris (M)	",["	body part	"], "	XI	",	1	),
     ventus	:  new Noun	("	wind	","	ventus, -i	",["	nature	"], "	XVI	",	1	),
     ver	:  new Noun	("	spring	","	ver, veris n	",["	time	"], "	XIII	",	2	),
-    verbera	:  new Noun	("	a lashing	","	verbera, um (n)	",["	thing	"], "	XXIII	",	3	),
+    verbera	:  new Noun	("	a lashing	","	verbera, verberum (n)	",["	thing	"], "	XXIII	",	3	),
     verbum	:  new Noun	("	word (ve)	","	verbum, -i	",["	communication	"], "	III	",	2	),
     verum	:  new Noun	("	truth	","	verum, i	",["	idea	"], "	XV	",	2	),
     vesper	:  new Noun	("	evening	","	vesper, vesperi	",["	time	"], "	XIII	",	1	),
