@@ -1,4 +1,5 @@
 function Noun(meaning, dictEntry, types, chapter, section){
+	console.log(dictEntry)
 	var self = this;
 	//clean up dictEntry
 	dictEntry = dictEntry.replace(" ,", ",");
@@ -85,7 +86,11 @@ function test(x){
 			self.gender = 'F';
 			self.pluralOnly = true;
 			return '1st';}
+		if(dictEntry.match(/um$/)){
+			self.pluralOnly = true;
+			return '3rd';}
 	}
+	//note that you have to check if it is a pluralOnly word
 	function getStem(){
 		if(self.declension === '2nd'){
 			//check for words like puer, vir, ager, etc... that would form a stem as
@@ -121,6 +126,9 @@ function test(x){
 			}
 		}
 		if(self.declension === '3rd'){
+			if(self.pluralOnly){
+				return dictEntry.match(/\s[a-zA-Z]+(?=um)/i).join();
+			}
 			return dictEntry.match(/\s[a-zA-Z]+(?=is)/i).join();
 		}
 	}
