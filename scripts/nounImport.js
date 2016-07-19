@@ -82,7 +82,7 @@ dictionary = {
     charta	:  new Noun	("	paper	","	charta, -ae	",["	material	"], "	XVIII	",	3	),
     cibus	:  new Noun	("	food	","	cibus, -i	",["	food	"], "	VIIII	",	1	),
     circus	:  new Noun	("	circle, orbit, circus	","	circus, -i	",["	place	"], "	XXXIIII	",	1	),
-    civis	:  new Noun	("	citizen	","	civis, civis (m,f)	",["	person	"], "	XXV	",	2	),
+    civis	:  new Noun	("	citizen	","	civis, civis (c)	",["	person	"], "	XXV	",	2	),
     clamor	:  new Noun	("	a shout	","	clamor, clamoris (m)	",["	sound	"], "	VIIII	",	2	),
     classis	:  new Noun	("	fleet	","	classis, classis F	",["	collective	"], "	XXXII	",	1	),
     clavis	:  new Noun	("	key	","	clavis, clavis (F)	",["	instrument	"], "	XXIII	",	3	),

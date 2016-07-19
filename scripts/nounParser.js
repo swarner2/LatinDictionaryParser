@@ -23,7 +23,7 @@ function test(x){
 	test(this.declension);
 	test(this.stem);
 
-
+	//delcaired are taken from this. Obvious gender from endings are taken with declension
 	function getGender(){
 	  //this.gender = undefined;
 	    //clean up the parentheses if there are any
@@ -73,7 +73,10 @@ function test(x){
 			return '1st';
 		}
 		if(dictEntry.match(/is$/)){return '3rd';}
-		if(dictEntry.match(/us$/)){return '4th';}
+		if(dictEntry.match(/us$/i)){
+			if(self.gender === undefined){self.gender = 'F';}
+			return '4th';
+		}
 		if(dictEntry.match(/orum$/)){
 			self.gender = 'N';
 			self.pluralOnly = true;
@@ -103,7 +106,12 @@ function test(x){
 			return dictEntry.match(/[a-zA-Z]+(?=es,)/i).join();
 		}
 		if(self.declension === '4th'){
-			return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
+			if(self.gender === "N"){
+				return dictEntry.match(/[a-zA-Z]+(?=u,)/i).join();
+			}
+			else {
+				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
+			}
 		}
 		if(self.declension === '3rd'){
 			return dictEntry.match(/\s[a-zA-Z]+(?=is)/i).join();
