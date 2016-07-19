@@ -103,12 +103,17 @@ function test(x){
 			if(dictEntry.match(/[a-z](?=,)/).join() === 'r') {
 				return dictEntry.match(/[a-zA-Z]+(?=,)/);
 			}
+			if(self.pluralOnly){
+				if (self.gender === 'M') {
+					return dictEntry.match(/[a-zA-Z]+(?=i,)/i).join();
+				}
+				else{
+					return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
+				}
+			}
 			//note that there are a few 2nd declension words that are Feminine
 			else if(self.gender === 'M' || self.gender === 'F'){
 				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
-			}
-			else if(self.pluralOnly){
-				return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 			}
 			else{
 				return dictEntry.match(/[a-zA-Z]+(?=um,)/i).join();
@@ -132,10 +137,17 @@ function test(x){
 			}
 		}
 		if(self.declension === '3rd'){
+			//this is incase the stem repeats and so is shown in the firstDict
+			if (dictEntry.match(/-is$/)) {
+				return self.firstDict.match(/[a-zA-Z]+(?=is)/i).join();
+			}
 			if(self.pluralOnly){
 				return dictEntry.match(/\s[a-zA-Z]+(?=um)/i).join();
 			}
-			return dictEntry.match(/\s[a-zA-Z]+(?=is)/i).join();
+			//this is the standard place to get the stem, the second part of the dictEntry
+			else {
+				return dictEntry.match(/\s[a-zA-Z]+(?=is)/i).join();
+			}
 		}
 	}
 }
