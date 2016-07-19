@@ -81,6 +81,10 @@ function test(x){
 			self.gender = 'N';
 			self.pluralOnly = true;
 			return '2nd';}
+		if(dictEntry.match(/arum$/)){
+			self.gender = 'F';
+			self.pluralOnly = true;
+			return '1st';}
 	}
 	function getStem(){
 		if(self.declension === '2nd'){
@@ -100,6 +104,9 @@ function test(x){
 			}
 		}
 		if(self.declension === '1st'){
+			if (self.pluralOnly) {
+				return dictEntry.match(/[a-zA-Z]+(?=ae,)/i).join();
+			}
 			return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 		}
 		if(self.declension === '5th'){

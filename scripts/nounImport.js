@@ -1,7 +1,7 @@
 dictionary = {
   nouns : {
     acies	:  new Noun	("	line of battle	","	acies, -ei	",["	thing"," place	"], "	XXXIII	",	1	),
-//    adulescens	:  new Noun	("	young person, young adult	","	adulescens, adulescentis (M)	",["	person	"], "	XVIIII	",	1	),
+    adulescens	:  new Noun	("	young person, young adult	","	adulescens, adulescentis (M)	",["	person	"], "	XVIIII	",	1	),
     aedificium	:  new Noun	("	building	","	aedificium, -i	",["	place	"], "	XXV	",	1	),
     aer	:  new Noun	("	air	","	aer, aeris (m)	",["	nature	"], "	X	",	1	),
     aestas	:  new Noun	("	summer	","	aestas, aestatis F	",["	time	"], "	XIII	",	2	),
@@ -153,7 +153,7 @@ dictionary = {
     fabula	:  new Noun	("	story	","	fabula, -ae	",["	art	"], "	XXV	",	1	),
     facies	:  new Noun	("	face (f)	","	facies, faciei	",["	body part	"], "	XIII	",	1	),
     factum	:  new Noun	("	deed	","	factum, -i	",["	event	"], "	XXIII	",	2	),
-    falx	:  new Noun	("	sickle	","	falx, falcis, f	",["	instrument	"], "	XXVII	",	1	),
+    falx	:  new Noun	("	sickle	","	falx, falcis f	",["	instrument	"], "	XXVII	",	1	),
     fama	:  new Noun	("	report, reputation	","	fama, -ae	",["	communication	"], "	XXVIII	",	1	),
     fames	:  new Noun	("	hunger	","	fames, famis F	",["	feeling	"], "	XXX	",	2	),
     familia	:  new Noun	("	family	","	familia, -ae	",["	person	"], "	II	",	1	),
