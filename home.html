@@ -11,7 +11,19 @@
   </head>
   <body ng-app="myApp">
     <div ng-controller="wordController">
-      
+        <input type="text" name="name" value="">
+        <ul>
+          <li class="container" ng-repeat="noun in nouns">
+            <div class="row">
+              <h4 class="">
+                {{noun.firstDict + ": " + noun.meaning}}
+              </h4>
+              <div class="" ng-repeat='(attribute, value) in noun'>
+                {{attribute + ": " + value}}
+              </div>
+            </div>
+          </li>
+        </ul>
     </div>
 <!-- Main Parser Module -->
     <script type="text/javascript" src="scripts/nounParser.js"></script>
