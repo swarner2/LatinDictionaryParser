@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat');
+    miniCSS = require('gulp-minify-css');
 
 function errorLog(error) {
     console.error(error);
@@ -24,7 +25,10 @@ gulp.task('scripts', function(){
 //Styles task
 //Uglifies
 gulp.task('styles', function(){
-  console.log('runs styles tasks');
+  gulp.src('css/*.css')
+    .pipe(miniCSS())
+    .on('error', errorLog)
+    .pipe(gulp.dest('build/css'));
 });
 
 // Watcher Tasks
@@ -35,6 +39,10 @@ gulp.task('watchJs',function(){
 
 gulp.task('watchHTML',function(){
   gulp.watch('index.html', ['copy-index-html']);
+});
+
+gulp.task('watchCSS',function(){
+  gulp.watch('css/*.css', ['styles']);
 });
 
 gulp.task('default', ['copy-index-html','scripts', 'styles', 'watchJs', 'watchHTML']);
