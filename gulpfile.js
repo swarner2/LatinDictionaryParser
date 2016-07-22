@@ -44,16 +44,10 @@ gulp.task('styles', function(){
 
 // Watcher Tasks
 // watches JS
-gulp.task('watchJs',['browserSync'],function(){
+gulp.task('watch',['browserSync'],function(){
   gulp.watch('scripts/*.js', ['scripts', browserSync.reload]);
-});
-
-gulp.task('watchHTML',['browserSync'],function(){
   gulp.watch('index.html', ['copy-index-html', browserSync.reload]);
-});
-
-gulp.task('watchCSS',['browserSync'],function(){
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('default', ['copy-index-html','scripts', 'styles', 'watchJs', 'watchHTML', 'watchCSS','browserSync']);
+gulp.task('default', ['copy-index-html','scripts', 'styles', 'watch', 'browserSync']);
