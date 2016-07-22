@@ -1,11 +1,22 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
-    concat = require('gulp-concat');
-    miniCSS = require('gulp-minify-css');
+    concat = require('gulp-concat'),
+    miniCSS = require('gulp-minify-css'),
+    browserSync = require('browser-sync');
 
 function errorLog(error) {
     console.error(error);
 }
+
+//auto-refresh browser
+gulp.task('browserSync', function(){
+  browserSync.init({
+    server: {
+      baseDir: 'build'
+    }
+  });
+});
+
 //get Index.html
 gulp.task('copy-index-html', function(){
   gulp.src('index.html')
@@ -33,16 +44,16 @@ gulp.task('styles', function(){
 
 // Watcher Tasks
 // watches JS
-gulp.task('watchJs',function(){
-  gulp.watch('scripts/*.js', ['scripts']);
+gulp.task('watchJs',['browserSync'],function(){
+  gulp.watch('scripts/*.js', ['scripts', browserSync.reload]);
 });
 
-gulp.task('watchHTML',function(){
-  gulp.watch('index.html', ['copy-index-html']);
+gulp.task('watchHTML',['browserSync'],function(){
+  gulp.watch('index.html', ['copy-index-html', browserSync.reload]);
 });
 
-gulp.task('watchCSS',function(){
-  gulp.watch('css/*.css', ['styles']);
+gulp.task('watchCSS',['browserSync'],function(){
+  gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('default', ['copy-index-html','scripts', 'styles', 'watchJs', 'watchHTML']);
+gulp.task('default', ['copy-index-html','scripts', 'styles', 'watchJs', 'watchHTML', 'watchCSS','browserSync']);
