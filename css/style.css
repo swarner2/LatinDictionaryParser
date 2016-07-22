@@ -1,0 +1,14 @@
+body{
+  background-color: black;
+}
+li{
+  background-color: white;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+li h4{
+  border-bottom: solid red 1px;
+}
+li div{
+  border-bottom: solid lightblue 1px;
+}
