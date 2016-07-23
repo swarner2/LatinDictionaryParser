@@ -1,24 +1,40 @@
+html{
+  height: 100%;
+}
 body{
   background-image: url('../image/Green-Chalkboard-Texture.jpg');
-  background-size: contain;
+  background-size: 100%;
   background-attachment: fixed;
+  padding-top: 70px;
 }
-ul{
-  list-style-type:  upper-roman;
+#inputli{
+  padding-top: 8px;
+  height: 0px;
+}
+li input{
+  padding-right: 25px !important;
+}
+#search-glyph{
+  top: -25px;
+  right: -185px;
+}
+content ul{
+  list-style-type:  none;
   list-style-position: inside;
 }
-li{
+content li{
   -moz-box-shadow:    3px 3px 5px 0px #000;
--webkit-box-shadow: 3px 3px 5px 0px #000;
-box-shadow:        3px 3px 5px 0px #000;
+  -webkit-box-shadow: 3px 3px 5px 0px #000;
+  box-shadow:        3px 3px 5px 0px #000;
   background-color: white;
   margin-bottom: 15px;
   padding-bottom: 15px;
 }
-li h4{
+content li h4{
+  padding-top: 5px;
   text-shadow: 1px 1px  lightgrey;
   border-bottom: solid red 1px;
 }
-li div{
+content li div{
   border-bottom: solid lightblue 1px;
 }
