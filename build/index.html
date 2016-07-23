@@ -16,8 +16,9 @@
   <nav-bar></nav-bar>
   <content select="">
     <div ng-controller="wordController">
+
       <ul>
-        <li class="container" ng-repeat="noun in nouns">
+        <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText">
           <div class="row">
             <h4 class="col-xs-10">
               {{noun.firstDict + ": " + noun.meaning}}
