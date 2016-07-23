@@ -1,5 +1,10 @@
 app.directive('navBar', function(){
   return {
-    templateUrl: 'html/navBar_directive.html'
+    scope : {
+      searchText : '='
+    },
+    templateUrl: 'html/navBar_directive.html',
+    controller: ['$scope', function($scope){
+    }]
   };
 });

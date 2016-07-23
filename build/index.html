@@ -13,12 +13,12 @@
 
   </head>
 <body ng-app="myApp">
-  <nav-bar></nav-bar>
+  <nav-bar search-text="searchText"></nav-bar>
   <content select="">
     <div ng-controller="wordController">
 
       <ul>
-        <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText">
+        <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText | limitTo:20">
           <div class="row">
             <h4 class="col-xs-10">
               {{noun.firstDict + ": " + noun.meaning}}
