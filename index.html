@@ -13,40 +13,7 @@
 
   </head>
 <body ng-app="myApp">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" name="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavBar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">My App</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavBar">
-        <ul  class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pg 1<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">option 1</a></li>
-              <li><a href="#">option 2</a></li>
-              <li><a href="#">option 3</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Pg 2</a></li>
-          <li><a href="#">Pg 3</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li id="inputli">
-            <input type="text" name="name" class="form-control" value="">
-            <span id='search-glyph' class="glyphicon glyphicon-search">
-          </li>
-          <li><a href="#">Profile Options</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <nav-bar></nav-bar>
   <content select="">
     <div ng-controller="wordController">
       <ul>

@@ -2,11 +2,18 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     miniCSS = require('gulp-minify-css'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    flatten = require('gulp-flatten'),
+    clean = require('gulp-clean');
 
 function errorLog(error) {
     console.error(error);
 }
+
+gulp.task('clean', function(){
+  gulp.src('build', {read: false})
+    .pipe(clean());
+});
 
 //auto-refresh browser
 gulp.task('browserSync', function(){
@@ -23,10 +30,17 @@ gulp.task('copy-index-html', function(){
     .pipe(gulp.dest('build/'));
 });
 
+//get all other html
+gulp.task('copy-html', function(){
+  gulp.src('scripts/modules/**/*.html')
+    .pipe(flatten())
+    .pipe(gulp.dest('build/html/'));
+});
+
 // Scripts task
 // Uglifies
 gulp.task('scripts', function(){
-  gulp.src('scripts/*.js')
+  gulp.src('scripts/**/*.js')
     .pipe(uglify())
     .on('error', errorLog)
     .pipe(concat('main.js'))
@@ -50,4 +64,4 @@ gulp.task('watch',['browserSync'],function(){
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('default', ['copy-index-html','scripts', 'styles', 'watch', 'browserSync']);
+gulp.task('default', ['clean','copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
