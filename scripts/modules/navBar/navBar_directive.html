@@ -12,7 +12,7 @@
       <ul  class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pg 1<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pg 1 {{1+1}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">option 1</a></li>
             <li><a href="#">option 2</a></li>
@@ -24,7 +24,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li id="inputli">
-          <input type="text" name="name" class="form-control" value="">
+          <input type="text" name="name" class="form-control" value="" ng-model="searchText">
           <span id='search-glyph' class="glyphicon glyphicon-search">
         </li>
         <li><a href="#">Profile Options</a></li>

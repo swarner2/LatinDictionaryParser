@@ -59,9 +59,10 @@ gulp.task('styles', function(){
 // Watcher Tasks
 // watches JS
 gulp.task('watch',['browserSync'],function(){
-  gulp.watch('scripts/*.js', ['scripts', browserSync.reload]);
+  gulp.watch('scripts/**/*.js', ['scripts', browserSync.reload]);
   gulp.watch('index.html', ['copy-index-html', browserSync.reload]);
+  gulp.watch('scripts/modules/**/*.html', ['copy-html', browserSync.reload]);  
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('default', ['clean','copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
+gulp.task('default', ['copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
