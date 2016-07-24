@@ -1,17 +1,18 @@
 <content select="">
-  <div>
-    <ul>
-      <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText | limitTo:20">
-        <div class="row">
-          <h4 class="col-xs-10">
-            {{noun.firstDict + ": " + noun.meaning}}
-          </h4>
-          <h4 class="col-xs-2">{{noun.chapter + "." + noun.section}}</h4>
-          <div class="col-xs-6" ng-repeat='(attribute, value) in noun'>
-            {{attribute + ": " + value}}
+  <div class="container">
+    <div class="row">
+      <ul class="col-xs-12">
+        <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText | limitTo:20">
+          <div class="row">
+            <h4 class="col-xs-12">
+              <b>{{noun.firstDict + ": "}}</b><i> {{noun.meaning}}</i>
+            </h4>
+            <div class="col-xs-12" ng-repeat='(attribute, value) in noun'>
+              <b>{{attribute + ": "}}</b> {{value}}
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </content>
