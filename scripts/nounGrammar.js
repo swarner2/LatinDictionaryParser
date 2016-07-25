@@ -14,7 +14,17 @@ var grammar = {
       fifthF: 'firstDict',
     },
     pl:{
-
+      firstF: 'ae',
+      firstM: 'ae',
+      secondM: 'i',
+      secondN: 'a',
+      thirdF: 'Es',
+      thirdM: 'Es',
+      thirdN: 'a',
+      fourthM: 'Us',
+      fourthN: 'a',
+      fifthM: 'Es',
+      fifthF: 'Es',
     }
   },
   accusative: {
@@ -32,7 +42,17 @@ var grammar = {
       fifthF: 'em',
     },
     pl:{
-
+      firstF: 'As',
+      firstM: 'As',
+      secondM: 'Os',
+      secondN: 'a',
+      thirdF: 'Es',
+      thirdM: 'Es',
+      thirdN: 'a',
+      fourthM: 'Us',
+      fourthN: 'Us',
+      fifthM: 'Es',
+      fifthF: 'Es',
     }
   },
   ablative: {
@@ -50,7 +70,17 @@ var grammar = {
       fifthF: 'E',
     },
     pl:{
-
+      firstF: 'is',
+      firstM: 'is',
+      secondM: 'is',
+      secondN: 'is',
+      thirdF: 'ibus',
+      thirdM: 'ibus',
+      thirdN: 'ibus',
+      fourthM: 'ibus',
+      fourthN: 'ibus',
+      fifthM: 'ebus',
+      fifthF: 'ebus',
     }
   },
 };
