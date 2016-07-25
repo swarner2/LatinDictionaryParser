@@ -103,7 +103,7 @@ function test(x){
 			//check for words like puer, vir, ager, etc... that would form a stem as
 			//its first dictionary entry
 			if(dictEntry.match(/[a-z](?=,)/).join() === 'r') {
-				return dictEntry.match(/[a-zA-Z]+(?=,)/);
+				return dictEntry.match(/[a-zA-Z]+(?=,)/).join();
 			}
 			if(self.pluralOnly){
 				if (self.gender === 'M') {
