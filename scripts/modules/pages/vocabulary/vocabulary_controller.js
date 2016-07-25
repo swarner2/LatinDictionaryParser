@@ -7,5 +7,8 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('vocabularyController',['$scope', function($scope){
+   $scope.formatValue = function(attribute, value){
+      return attribute === 'types' ? value.join() : value;
+    };
     $scope.nouns = dictionary.nouns;
 }]);

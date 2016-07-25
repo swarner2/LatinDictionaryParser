@@ -8,7 +8,7 @@
               <b>{{noun.firstDict + ": "}}</b><i> {{noun.meaning}}</i>
             </h4>
             <div class="col-xs-12" ng-repeat='(attribute, value) in noun'>
-              <b>{{attribute + ": "}}</b> {{value}}
+              <b>{{attribute + ": "}}</b> {{formatValue(attribute, value, noun)}}
             </div>
           </div>
         </li>
