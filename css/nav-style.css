@@ -1,7 +1,25 @@
-@media (max-width: @screen-xs) {
-    body{font-size: 10px;}
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  body {
+    padding-top: 70px;
+  }
+  #largeinputli{
+    visibility: hidden;
+    width: 0%;
+  }
+  #inputli{
+    visibility: visible;
+  }
+}
+#search-glyph{
+  top: -25px;
+  right: -185px;
+}
+/* Medium devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+
 }
 
-@media (max-width: @screen-sm) {
-    body{font-size: 14px;}
-}
+/* Large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+ }

@@ -1,1 +1,1 @@
-@media (max-width:@screen-xs){body{font-size:10px}}@media (max-width:@screen-sm){body{font-size:14px}}
+@media screen and (min-width:768px){body{padding-top:70px}#largeinputli{visibility:hidden;width:0}#inputli{visibility:visible}}#search-glyph{top:-25px;right:-185px}
