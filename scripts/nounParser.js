@@ -9,7 +9,7 @@ function Noun(meaning, dictEntry, types, chapter, section){
 	this.declension = getDeclension();
 	this.stem = getStem();
 	this.meaning = meaning.trim();
-	this.types = types;
+	this.types = types.map(function(x){return x.trim();});
 	this.chapter = chapter.trim();
 	this.section = section;
 
