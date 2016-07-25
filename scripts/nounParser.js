@@ -61,24 +61,24 @@ function test(x){
 		//check endings to get undefined genders and declensions
 		if(dictEntry.match(/ei$/)){
 			if(self.gender === undefined){self.gender = 'F';}
-			return '5th';}
+			return 'fifth';}
 		if(dictEntry.match(/i$/)){
 			//if the gender was not stated in the dictionary entry pull it from the default types of declensions
 			if(self.gender === undefined){
 				if(dictEntry.match(/um(?=,)/)){self.gender = 'N'; }
 				else{ self.gender = 'M';}
 			}
-			return '2nd';
+			return 'second';
 		}
 		if(dictEntry.match(/ae$/)){
 			if(self.gender === undefined){
 				self.gender = 'F';}
-			return '1st';
+			return 'first';
 		}
-		if(dictEntry.match(/is$/)){return '3rd';}
+		if(dictEntry.match(/is$/)){return 'third';}
 		if(dictEntry.match(/us$/i)){
 			if(self.gender === undefined){self.gender = 'F';}
-			return '4th';
+			return 'fourth';
 		}
 		if(dictEntry.match(/orum$/)){
 			if (self.firstDict.match(/i$/)) {
@@ -88,18 +88,18 @@ function test(x){
 				self.gender = 'N';
 			}
 			self.pluralOnly = true;
-			return '2nd';}
+			return 'second';}
 		if(dictEntry.match(/arum$/)){
 			self.gender = 'F';
 			self.pluralOnly = true;
-			return '1st';}
+			return 'first';}
 		if(dictEntry.match(/um$/)){
 			self.pluralOnly = true;
-			return '3rd';}
+			return 'third';}
 	}
 	//note that you have to check if it is a pluralOnly word
 	function getStem(){
-		if(self.declension === '2nd'){
+		if(self.declension === 'second'){
 			//check for words like puer, vir, ager, etc... that would form a stem as
 			//its first dictionary entry
 			if(dictEntry.match(/[a-z](?=,)/).join() === 'r') {
@@ -113,7 +113,7 @@ function test(x){
 					return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 				}
 			}
-			//note that there are a few 2nd declension words that are Feminine
+			//note that there are a few second declension words that are Feminine
 			else if(self.gender === 'M' || self.gender === 'F'){
 				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
 			}
@@ -121,16 +121,16 @@ function test(x){
 				return dictEntry.match(/[a-zA-Z]+(?=um,)/i).join();
 			}
 		}
-		if(self.declension === '1st'){
+		if(self.declension === 'first'){
 			if (self.pluralOnly) {
 				return dictEntry.match(/[a-zA-Z]+(?=ae,)/i).join();
 			}
 			return dictEntry.match(/[a-zA-Z]+(?=a,)/i).join();
 		}
-		if(self.declension === '5th'){
+		if(self.declension === 'fifth'){
 			return dictEntry.match(/[a-zA-Z]+(?=es,)/i).join();
 		}
-		if(self.declension === '4th'){
+		if(self.declension === 'fourth'){
 			if(self.gender === "N"){
 				return dictEntry.match(/[a-zA-Z]+(?=u,)/i).join();
 			}
@@ -138,7 +138,7 @@ function test(x){
 				return dictEntry.match(/[a-zA-Z]+(?=us,)/i).join();
 			}
 		}
-		if(self.declension === '3rd'){
+		if(self.declension === 'third'){
 			//this is incase the stem repeats and so is shown in the firstDict
 			if (dictEntry.match(/-is$/)) {
 				return self.firstDict.match(/[a-zA-Z]+(?=is)/i).join();
