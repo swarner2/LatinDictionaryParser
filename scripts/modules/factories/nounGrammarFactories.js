@@ -28,13 +28,13 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   };
 
   nounUtilities.placeWhere = function (){
-    var prep = ' in ';
     var place = nounUtilities.pickNoun('place');
+    place.prep = ' in ';
     var meaning = utilities.random(place.meaning.split(', '));
     place.number = utilities.random(['sg', 'pl']);
-    place.stem = prep + place.stem;
+    place.stem = place.stem;
     place.ending = grammar.ablative[place.number][place.declension + place.gender];
-    place.meaning = place.number === 'sg' ? prep + ' the ' + meaning : prep + ' the ' + meaning + 's';
+    place.meaning = place.number === 'sg' ? place.prep + ' the ' + meaning : place.prep + ' the ' + meaning + 's';
     return place;
   };
 

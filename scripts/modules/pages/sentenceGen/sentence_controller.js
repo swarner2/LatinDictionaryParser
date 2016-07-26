@@ -14,12 +14,33 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
   $scope.place = nounUtilities.placeWhere();
   $scope.directObject = nounUtilities.directObject();
   $scope.sentence = {
-      latin : [$scope.subject, $scope.place, $scope.directObject ],
+      latin : [
+        $scope.subject.stem,
+        $scope.subject.ending + " " ,
+        $scope.place.prep,
+        $scope.place.stem,
+        $scope.place.ending + " ",
+        $scope.directObject.stem,
+        $scope.directObject.ending + " ",
+      ],
       english : [$scope.subject, $scope.directObject, $scope.place ],
   };
 
 
   $scope.getHelp = function(noun, bool){
+    //catch the prepositions
+    if(noun === this.place.prep){noun = this.place;}
+    //catch the endings
+
+    
+    //catch the stems
+    if(typeof noun === 'string'){
+        noun = this.sentence.english.filter(function(v){
+          return v.stem == noun;
+        })[0];
+
+    }
+    console.log(typeof noun);
     $scope.help = noun;
     $scope.helperText = {
       "visibility" : 'hidden'
