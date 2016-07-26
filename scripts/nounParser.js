@@ -30,11 +30,12 @@ function test(x){
 	test(this.gender);
 	test(this.declension);
 	test(this.stem);
+	test(this.meaning);
 
 
 	function getMeanings(){
 		//clean input
-	 	meaning = meaning.replace(/\(\w*\)/i, "");
+	 	meaning = meaning.replace(/\([\w\s]*\)/i, "");
 		meaning = meaning.replace(';', ',');
 		return meaning.trim();
 	}

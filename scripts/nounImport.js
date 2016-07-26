@@ -91,7 +91,7 @@ dictionary = {
       new Noun	("	hill	","	collis, collis (m)	",["	place	"], "	VIIII	",	1	),
       new Noun	("	conversation (c)	","	colloquium, -i	",["	conversation	"], "	XX	",	2	),
       new Noun	("	neck	","	collum, -i	",["	body part	"], "	VIII	",	1	),
-      new Noun	("	(tenant) farmer (c)	","	colonus, -i	",["	person	"], "	XXVII	",	2	),
+      new Noun	("	tenant farmer (c)	","	colonus, -i	",["	person	"], "	XXVII	",	2	),
       new Noun	("	color	","	color, coloris (M)	",["	attribute	"], "	XI	",	1	),
       new Noun	("	column	","	columna, -ae	",["	place	"], "	XVIIII	",	1	),
       new Noun	("	companion	","	comes, comitis (m/f)	",["	person	"], "	XXIII	",	3	),
