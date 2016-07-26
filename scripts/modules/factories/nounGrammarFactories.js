@@ -29,6 +29,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     var prep = ' in';
     var place = nounUtilities.pickNoun('place');
     place.number = utilities.random(['sg', 'pl']);
+    place.stem = 'in ' + place.stem;
     place.ending = grammar.ablative[place.number][place.declension + place.gender];
     place.meaning = place.number === 'sg' ? prep + ' the ' + place.meaning : prep + ' the ' + place.meaning + 's';
     return place;

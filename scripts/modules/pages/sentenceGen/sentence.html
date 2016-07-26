@@ -4,8 +4,9 @@
     <span ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
   </h3>
   <h3 class="text-center">
-    {{subject.stem + subject.ending}}{{' in ' + place.stem + place.ending}}{{' ' + directObject.stem + directObject.ending}}
+    <span ng-repeat="noun in sentence.latin" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.stem.trim() + noun.ending + " " }}</span>
   </h3>
+  
   <content id='helperText' ng-style="helperText" class="container">
     <div class="row">
       <ul class="col-xs-12">
