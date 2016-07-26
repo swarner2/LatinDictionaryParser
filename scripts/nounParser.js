@@ -12,6 +12,12 @@ function Noun(meaning, dictEntry, types, chapter, section){
 	this.types = types.map(function(x){return x.trim();});
 	this.chapter = chapter.trim();
 	this.section = section;
+	this.ending = '';
+
+//so endings don't show up in the helper tool
+	Object.defineProperty(this, 'ending', {
+  enumerable: false,
+	});
 
 function test(x){
 	if(x === undefined){

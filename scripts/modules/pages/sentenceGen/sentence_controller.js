@@ -8,29 +8,42 @@ app.config(['$routeProvider', function($routeProvider){
 
 app.controller('sentenceController', ['$scope', function($scope){
   var randomNumber = random(['sg', 'pl']);
+  $scope.helperText = {'visibility' : 'hidden'};
   $scope.nouns = dictionary.nouns;
   $scope.subject = subject();
   $scope.place = placeWhere();
   $scope.directObject = directObject();
+  $scope.sentence = {
+      latin : [$scope.subject, $scope.place, $scope.directObject ],
+      english : [$scope.subject, $scope.directObject, $scope.place ],
+  };
   // $scope.verbs = dictionary.verbs;
-  // $scope.sentence.latin = subject.stem + subject.ending + " in " + place.stem + place.ending + " " + directObject.stem + directObject.ending;
+  // + " in " + place.stem + place.ending + " " + directObject.stem + directObject.ending;
+
+
 
   function subject(){
     var subject = pickNoun('person');
     if(randomNumber === 'sg'){
       subject.stem = subject.firstDict;
       subject.ending = '';
+      subject.meaning = 'the ' + subject.meaning + ' verbs';
     }
     else {
+      subject.meaning = 'the ' + subject.meaning + 's verb';
       subject.ending = grammar.nominative[randomNumber][subject.declension + subject.gender];
     }
     return subject;
   }
+
   function placeWhere(){
+    var prep = ' in';
     var place = pickNoun('place');
     place.ending = grammar.ablative[randomNumber][place.declension + place.gender];
+    place.meaning = randomNumber === 'sg' ? prep + ' the ' + place.meaning : prep + ' the ' + place.meaning + 's';
     return place;
   }
+
   function directObject(){
     var directObject = pickNoun('any');
     directObject.ending = grammar.accusative[randomNumber][directObject.declension + directObject.gender];
@@ -38,8 +51,12 @@ app.controller('sentenceController', ['$scope', function($scope){
       directObject.stem = directObject.firstDict;
       directObject.ending = '';
     }
+    directObject.meaning = randomNumber === 'sg' ? ' the ' + directObject.meaning : ' the ' + directObject.meaning + 's';
     return directObject;
   }
+
+
+
   //random takes an array and gives back a random value of that array
   function random(arr){
     return arr[Math.floor(Math.random() * arr.length)];
@@ -52,5 +69,16 @@ app.controller('sentenceController', ['$scope', function($scope){
       return x.types == type;
     }));
   }
-
+  $scope.getHelp = function(noun, bool){
+    $scope.help = noun;
+    $scope.helperText = {
+      "visibility" : 'hidden'
+    };
+    if (bool) {
+      $scope.helperText = {
+        "visibility" : 'visable'
+      };
+    }
+    //"First Entry: " + word.firstDict + ", stem/declension: " + word.stem + " /" + word.declension;
+  };
 }]);
