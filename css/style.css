@@ -54,3 +54,8 @@ content li h4{
 content li div{
   border-bottom: solid lightblue 1px;
 }
+
+#sentenceGen h3{
+  color: white;
+text-shadow: 1px 5px 13px black;
+}

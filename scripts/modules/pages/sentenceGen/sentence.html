@@ -1,23 +1,26 @@
-<h1 class="text-center">sentence generator</h1>
-<h3  class="text-center">
-  <span ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
-</h3>
-<h3 class="text-center">
-  {{subject.stem + subject.ending}}{{' in ' + place.stem + place.ending}}{{' ' + directObject.stem + directObject.ending}}
-</h3>
-<content id='helperText' ng-style="helperText" class="container">
-  <div class="row">
-    <ul class="col-xs-12">
-      <li class="container">
-        <div class="row">
-          <h4 class="col-xs-12">
-            <b>{{help.firstDict + ": "}}</b><i> {{help.meaning}}</i>
-          </h4>
-          <div class="col-xs-12" ng-repeat='(attribute, value) in help'>
-            <b>{{attribute + ": " + value}}</b>
+<div id="sentenceGen">
+  <h1 class="text-center">sentence generator</h1>
+  <h3  class="text-center">
+    <span ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
+  </h3>
+  <h3 class="text-center">
+    {{subject.stem + subject.ending}}{{' in ' + place.stem + place.ending}}{{' ' + directObject.stem + directObject.ending}}
+  </h3>
+  <content id='helperText' ng-style="helperText" class="container">
+    <div class="row">
+      <ul class="col-xs-12">
+        <li class="container">
+          <div class="row">
+            <h4 class="col-xs-12">
+              <b>{{help.firstDict + ": "}}</b><i> {{help.meaning}}</i>
+            </h4>
+            <div class="col-xs-12" ng-repeat='(attribute, value) in help'>
+              <b>{{attribute + ": " + value}}</b>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</content>
+        </li>
+      </ul>
+    </div>
+  </content>
+
+</div>
