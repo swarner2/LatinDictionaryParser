@@ -8,7 +8,7 @@ function Noun(meaning, dictEntry, types, chapter, section){
 	this.gender = getGender();
 	this.declension = getDeclension();
 	this.stem = getStem();
-	this.meaning = meaning.trim();
+	this.meaning = getMeanings();
 	this.types = types.map(function(x){return x.trim();});
 	this.chapter = chapter.trim();
 	this.section = section;
@@ -24,12 +24,20 @@ function test(x){
 		console.log(self);
 		self.meaning = 'something was not defined, check how you entered the data for this word to fix it';
 	}
+	if(x.match(/\(/)){console.log(self);}
 }
 	test(this.firstDict);
 	test(this.gender);
 	test(this.declension);
 	test(this.stem);
 
+
+	function getMeanings(){
+		//clean input
+	 	meaning = meaning.replace(/\(\w*\)/i, "");
+		meaning = meaning.replace(';', ',');
+		return meaning.trim();
+	}
 	//delcaired are taken from this. Obvious gender from endings are taken with declension
 	function getGender(){
 	  //this.gender = undefined;
