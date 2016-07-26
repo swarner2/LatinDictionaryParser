@@ -14,6 +14,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     var subject = nounUtilities.pickNoun('person');
     var meaning = utilities.random(subject.meaning.split(', '));
     subject.number = utilities.random(['sg', 'pl']);
+    subject.case = 'nominative';
     //Nominative Singular is always show in the firstDict
     if(subject.number === 'sg'){
       subject.stem = subject.firstDict;
@@ -32,6 +33,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     place.prep = ' in ';
     var meaning = utilities.random(place.meaning.split(', '));
     place.number = utilities.random(['sg', 'pl']);
+    place.case = 'ablative';
     place.stem = place.stem;
     place.ending = grammar.ablative[place.number][place.declension + place.gender];
     place.meaning = place.number === 'sg' ? place.prep + ' the ' + meaning : place.prep + ' the ' + meaning + 's';
@@ -42,6 +44,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     var directObject = nounUtilities.pickNoun('any');
     var meaning = utilities.random(directObject.meaning.split(', '));
     directObject.number = utilities.random(['sg', 'pl']);
+    directObject.case = 'accusative';
     directObject.ending = grammar.accusative[directObject.number][directObject.declension + directObject.gender];
     if (directObject.ending === 'firstDict') {
       directObject.stem = directObject.firstDict;
