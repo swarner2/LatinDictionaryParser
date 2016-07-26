@@ -10,4 +10,6 @@ app.config(['$routeProvider', function($routeProvider){
     });
 }]);
 
-app.controller('homeController',function(){});
+app.controller('homeController',["$scope", "utilities", function($scope ,utilities){
+  $scope.rand = utilities.random(['sg','pl']);
+}]);
