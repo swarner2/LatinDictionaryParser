@@ -1,12 +1,12 @@
 <div id="sentenceGen">
   <h1 class="text-center">sentence generator</h1>
   <h3  class="text-center">
-    <span ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
+    <span class='word' ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
   </h3>
   <h3 class="text-center">
-    <span ng-repeat="noun in sentence.latin" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.stem.trim() + noun.ending + " " }}</span>
+    <span class='word' ng-repeat="noun in sentence.latin" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.stem.trim() + noun.ending + " " }}</span>
   </h3>
-  
+
   <content id='helperText' ng-style="helperText" class="container">
     <div class="row">
       <ul class="col-xs-12">

@@ -17,8 +17,7 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
       latin : [$scope.subject, $scope.place, $scope.directObject ],
       english : [$scope.subject, $scope.directObject, $scope.place ],
   };
-  // $scope.verbs = dictionary.verbs;
-  // + " in " + place.stem + place.ending + " " + directObject.stem + directObject.ending;
+
 
   $scope.getHelp = function(noun, bool){
     $scope.help = noun;
@@ -30,6 +29,5 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
         "visibility" : 'visable'
       };
     }
-    //"First Entry: " + word.firstDict + ", stem/declension: " + word.stem + " /" + word.declension;
   };
 }]);

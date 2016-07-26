@@ -14,6 +14,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     var subject = nounUtilities.pickNoun('person');
     var meaning = utilities.random(subject.meaning.split(', '));
     subject.number = utilities.random(['sg', 'pl']);
+    //Nominative Singular is always show in the firstDict
     if(subject.number === 'sg'){
       subject.stem = subject.firstDict;
       subject.ending = '';
