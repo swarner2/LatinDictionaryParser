@@ -30,9 +30,25 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
   $scope.submit = 'submit';
   $scope.submitSentence = function(input){
     input = input.split(' ');
-    latin = $scope.sentence.latin.filter(function(x,y){
-      return y !== ' ';
-    });
+    latin = $scope.sentence.latin;
+    //declare result array
+    //iterate over input
+      //look for next space in latin
+        //find space in latin
+          //count entries in latin upto the space
+            //if count is 2
+              //look for stem at space index - 2
+                //get stem.length
+                //get string of input at stem.length
+                //if both sections equal correct
+                  //mark as correct and push to result
+              //look for ending at space index -1
+          //if
+          //
+      //if input index equals latin index
+        //mark it as true
+
+        //
     check = input.map(function(v, i){
       return v.trim() == latin[i].trim() ? true : false;
     });
