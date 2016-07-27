@@ -7,6 +7,7 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', function($scope, utilities, nounUtilities){
+
   var randomNumber = utilities.random(['sg', 'pl']);
   $scope.helperText = {'visibility' : 'hidden'};
   $scope.nouns = dictionary.nouns;
@@ -24,6 +25,18 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
         $scope.directObject.ending + " ",
       ],
       english : [$scope.subject, $scope.directObject, $scope.place ],
+  };
+
+  $scope.submit = 'submit';
+  $scope.submitSentence = function(input){
+    input = input.split(' ');
+    latin = $scope.sentence.latin.filter(function(x,y){
+      return y !== ' ';
+    });
+    check = input.map(function(v, i){
+      return v.trim() == latin[i].trim() ? true : false;
+    });
+    console.log(check);
   };
 
 
