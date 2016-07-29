@@ -4,7 +4,7 @@
       <span class='word' ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
     </h1>
 
-    <h1 id="answerSentence" class="text-center sentence">{{searchText}}</h1>
+    <h1 id="answerSentence" class="text-center sentence" ng-style='answerStyle'>{{test(searchText)}}</h1>
 
     <h1 id="latinSentence" class="text-center sentence">
       <span class='word' ng-repeat="nounPart in sentence.latin" ng-mouseenter="getHelp(nounPart, true)" ng-mouseleave="getHelp(nounPart, false)" >{{nounPart}}</span>

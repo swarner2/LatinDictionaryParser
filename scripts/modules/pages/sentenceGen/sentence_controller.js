@@ -27,49 +27,35 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
       english : [$scope.subject, $scope.directObject, $scope.place ],
   };
 
-  $scope.submit = 'submit';
-  $scope.submitSentence = function(input){
-    input = input.split(' ');
-    latin = $scope.sentence.latin;
-    //declare result array
-    //iterate over input
-      //look for next space in latin
-        //find space in latin
-          //count entries in latin upto the space
-            //if count is 2
-              //look for stem at space index - 2
-                //get stem.length
-                //get string of input at stem.length
-                //if both sections equal correct
-                  //mark as correct and push to result
-              //look for ending at space index -1
-          //if
-          //
-      //if input index equals latin index
-        //mark it as true
-
-        //
-    check = input.map(function(v, i){
-      return v.trim() == latin[i].trim() ? true : false;
+  $scope.test = function(input){
+    var correctness = true;
+    if(input === undefined){
+      $scope.answerStyle = {'text-shadow' : '1px 5px 13px black'};
+      return 'Type into the Search Box to answer the Qeustion!';
+    }
+    input = input.trim().replace(/\s\s*/g,' ').split('');
+    answer = $scope.sentence.latin.join('').trim().replace(/\s\s*/g, ' ').split('');
+    input.forEach(function(letter, i){
+       if(letter !== answer[i]){correctness = false;}
     });
-    console.log(check);
+    console.log(correctness);
+    if(correctness){
+      $scope.answerStyle = {'text-shadow' : '5px 5px 23px #0555ff'};
+    }
+    else{
+      $scope.answerStyle = {'text-shadow' : '2px 2px 10px red'};
+    }
+    return input.join('');
   };
-
 
   $scope.getHelp = function(noun, bool){
     //catch the prepositions
-    // console.log(this);
-    // console.log(this.$$prevSibling.nounPart);
-    // console.log(this.$index);
     if(noun === this.place.prep){noun = this.place;}
     //catch the endings
       // console.log(this.sentence.english);
       var checkEnding = this.sentence.english.filter(function(v){
-        // console.log(v.ending);
         return v.ending == noun;
       });
-
-    // console.log(checkEnding);
     //catch the stems
     if(typeof noun === 'string'){
         noun = this.sentence.english.filter(function(v){
