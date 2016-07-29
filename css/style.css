@@ -47,6 +47,12 @@ content li{
   padding-bottom: 15px;
 }
 
+content li:hover{
+  -moz-box-shadow:    5px 5px 23px 0px #0555ff;
+  -webkit-box-shadow: 5px 5px 23px 0px #0555ff;
+  box-shadow:        5px 5px 23px 0px #0555ff;
+}
+
 content li h4{
   padding-top: 5px;
   border-bottom: solid red 1px;
