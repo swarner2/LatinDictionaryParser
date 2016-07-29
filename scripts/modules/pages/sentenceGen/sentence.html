@@ -6,7 +6,7 @@
 
     <h1 id="answerSentence" class="text-center sentence" ng-style='answerStyle'>{{test(searchText)}}</h1>
 
-    <h1 id="latinSentence" class="text-center sentence">
+    <h1 id="latinSentence" ng-style='latinStyle' class="text-center sentence">
       <span class='word' ng-repeat="nounPart in sentence.latin" ng-mouseenter="getHelp(nounPart, true)" ng-mouseleave="getHelp(nounPart, false)" >{{nounPart}}</span>
     </h1>
 
@@ -31,6 +31,6 @@
 </div>
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
   <div class="container-fluid">
-    <button id='submitButton' ng-click="submitSentence(searchText)" type="button" class="btn btn-primary col-xs-12">{{submit}}</button>
+    <button id='submitButton' ng-click="toggleButton()" type="button" class="btn btn-primary col-xs-12">{{buttonText}}</button>
   </div>
 </nav>

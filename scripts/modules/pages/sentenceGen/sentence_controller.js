@@ -86,4 +86,28 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
       };
     }
   };
+  $scope.latinStyle = {'visibility' : 'hidden'};
+  $scope.buttonText = 'Show Answer';
+  $scope.toggleButton = function(){
+    if($scope.buttonText === 'Show Answer'){
+      $scope.latinStyle = {'visibility' : 'visible'};
+      $scope.buttonText = 'Next Question';
+    }
+    else {
+      $scope.buttonText = 'Show Answer';
+      $scope.subject = nounUtilities.subject();
+      $scope.place = nounUtilities.placeWhere();
+      $scope.directObject = nounUtilities.directObject();
+      $scope.sentence.latin = [
+        $scope.subject.stem,
+        $scope.subject.ending + " " ,
+        $scope.place.prep,
+        $scope.place.stem,
+        $scope.place.ending + " ",
+        $scope.directObject.stem,
+        $scope.directObject.ending + " ",
+      ];
+     $scope.searchText = '';
+    }
+  };
 }]);
