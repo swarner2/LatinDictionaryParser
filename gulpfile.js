@@ -4,8 +4,7 @@ var gulp = require('gulp'),
     miniCSS = require('gulp-minify-css'),
     browserSync = require('browser-sync'),
     flatten = require('gulp-flatten'),
-    clean = require('gulp-clean'),
-    connect = require('gulp-connect');
+    clean = require('gulp-clean');
 
 var port = process.env.PORT || 8080;
 
@@ -69,15 +68,7 @@ gulp.task('watch',['browserSync'],function(){
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('connect', function() {
-  connect.server({
-    root: 'build',
-    port: port, // localhost:5000
-    livereload: false,
-    fallback: 'build/index.html'
-  });
-});
 
-gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
+gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles']);
 
 gulp.task('default', ['copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
