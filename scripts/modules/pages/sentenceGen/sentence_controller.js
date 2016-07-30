@@ -6,7 +6,9 @@ app.config(['$routeProvider', function($routeProvider){
     });
 }]);
 
-app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', function($scope, utilities, nounUtilities){
+app.controller('sentenceController', [
+  '$scope','utilities', 'nounUtilities', '$rootScope',
+  function($scope, utilities, nounUtilities, $rootScope){
 
   var randomNumber = utilities.random(['sg', 'pl']);
   $scope.helperText = {'visibility' : 'hidden'};
@@ -38,7 +40,6 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
     input.forEach(function(letter, i){
        if(letter !== answer[i]){correctness = false;}
     });
-    console.log(correctness);
     if(correctness){
       $scope.answerStyle = {'text-shadow' : '5px 5px 23px #0555ff'};
     }
@@ -88,7 +89,10 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
   };
   $scope.latinStyle = {'visibility' : 'hidden'};
   $scope.buttonText = 'Show Answer';
+
+
   $scope.toggleButton = function(){
+    console.log(this);
     if($scope.buttonText === 'Show Answer'){
       $scope.latinStyle = {'visibility' : 'visible'};
       $scope.buttonText = 'Next Question';
@@ -108,8 +112,9 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
         $scope.directObject.ending + " ",
       ];
       $scope.sentence.english = [$scope.subject, $scope.directObject, $scope.place ];
-
+      $rootScope.searchText = '';
       $scope.latinStyle = {'visibility' : 'hidden'};
+      $rootScope.$digest();
 
     }
   };
