@@ -67,4 +67,6 @@ gulp.task('watch',['browserSync'],function(){
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('default', ['copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
+gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles']);
+
+gulp.task('default', ['build', 'watch', 'browserSync']);
