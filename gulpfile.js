@@ -21,7 +21,8 @@ gulp.task('browserSync', function(){
     server: {
       baseDir: 'build'
     },
-    port: process.env.PORT || 8080
+    port: process.env.PORT || 8080,
+    ui: process.env.PORT || 8080,
   });
 });
 
