@@ -20,7 +20,8 @@ gulp.task('browserSync', function(){
   browserSync.init({
     server: {
       baseDir: 'build'
-    }
+    },
+    port: process.env.PORT || 8080
   });
 });
 
@@ -61,7 +62,7 @@ gulp.task('styles', function(){
 gulp.task('watch',['browserSync'],function(){
   gulp.watch('scripts/**/*.js', ['scripts', browserSync.reload]);
   gulp.watch('index.html', ['copy-index-html', browserSync.reload]);
-  gulp.watch('scripts/modules/**/*.html', ['copy-html', browserSync.reload]);  
+  gulp.watch('scripts/modules/**/*.html', ['copy-html', browserSync.reload]);
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
