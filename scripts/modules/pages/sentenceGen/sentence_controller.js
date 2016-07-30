@@ -107,7 +107,10 @@ app.controller('sentenceController', ['$scope','utilities', 'nounUtilities', fun
         $scope.directObject.stem,
         $scope.directObject.ending + " ",
       ];
-     $scope.searchText = '';
+      $scope.sentence.english = [$scope.subject, $scope.directObject, $scope.place ];
+
+      $scope.latinStyle = {'visibility' : 'hidden'};
+
     }
   };
 }]);
