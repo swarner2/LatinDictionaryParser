@@ -71,8 +71,10 @@ gulp.task('connect', function() {
   connect.server({
     root: 'build',
     port: process.env.PORT || 5000, // localhost:5000
-    livereload: false
+    livereload: false,
+    fallback: 'path/index.html'
   });
+  connect.serverClose();
 });
 
 gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
