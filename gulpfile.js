@@ -7,6 +7,8 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     connect = require('gulp-connect');
 
+var port = process.env.PORT || 8080;
+
 function errorLog(error) {
     console.error(error);
 }
@@ -22,7 +24,7 @@ gulp.task('browserSync', function(){
     server: {
       baseDir: 'build'
     },
-    port: process.env.PORT || 8080,
+    port: port,
   });
 });
 
@@ -70,10 +72,11 @@ gulp.task('watch',['browserSync'],function(){
 gulp.task('connect', function() {
   connect.server({
     root: 'build',
-    port: process.env.PORT || 5000, // localhost:5000
+    port: port, // localhost:5000
     livereload: false,
     fallback: 'path/index.html'
   });
+  connect.serverClose();
 });
 
 gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
