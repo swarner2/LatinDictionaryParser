@@ -74,7 +74,6 @@ gulp.task('connect', function() {
     livereload: false,
     fallback: 'path/index.html'
   });
-  connect.serverClose();
 });
 
 gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
