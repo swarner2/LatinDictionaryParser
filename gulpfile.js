@@ -74,9 +74,8 @@ gulp.task('connect', function() {
     root: 'build',
     port: port, // localhost:5000
     livereload: false,
-    fallback: 'path/index.html'
+    fallback: 'build/index.html'
   });
-  connect.serverClose();
 });
 
 gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
