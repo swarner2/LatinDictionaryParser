@@ -75,6 +75,6 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'serveprod']);
+gulp.task('build',['copy-index-html', 'copy-html' ,'scripts', 'styles', 'connect']);
 
 gulp.task('default', ['copy-index-html', 'copy-html' ,'scripts', 'styles', 'watch', 'browserSync']);
