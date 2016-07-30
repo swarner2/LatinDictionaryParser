@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     miniCSS = require('gulp-minify-css'),
     browserSync = require('browser-sync'),
     flatten = require('gulp-flatten'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    connect = require('gulp-connect');
 
 function errorLog(error) {
     console.error(error);
@@ -66,7 +67,7 @@ gulp.task('watch',['browserSync'],function(){
   gulp.watch('css/*.css', ['styles', browserSync.reload]);
 });
 
-gulp.task('serveprod', function() {
+gulp.task('connect', function() {
   connect.server({
     root: 'build',
     port: process.env.PORT || 5000, // localhost:5000
