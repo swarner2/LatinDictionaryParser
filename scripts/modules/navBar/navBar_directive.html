@@ -9,10 +9,13 @@
       <a class="navbar-brand" href="#">My App </a>
     </div>
     <ul id="largeinputli" class="nav navbar-nav navbar-right">
-      <li >
-          <input type="text" name="name" class="form-control" value="" ng-keypress="toggleButton()"  ng-model="searchText">
+      <li  >
+        <form ng-submit='submit()'>
+          <input type="text" name="name" class="form-control" value="searchText" ng-model="searchText">
           <span id='large-search-glyph' class="glyphicon glyphicon-search">
+        </form>
         </li>
+
       </ul>
     <div class="collapse navbar-collapse" id="myNavBar">
       <ul  class="nav navbar-nav">
@@ -30,8 +33,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li id="inputli">
-            <input type="text" name="name" class="form-control" value="" ng-keypress="toggleButton()" ng-model="searchText">
-            <span id='search-glyph' class="glyphicon glyphicon-search">
+            <form ng-submit='submit()'>
+              <input type="text" name="name" class="form-control" value=""  ng-model="searchText">
+              <span id='search-glyph' class="glyphicon glyphicon-search">
+            </form>
             </li>
         <li><a href="#">Profile Options</a></li>
       </ul>

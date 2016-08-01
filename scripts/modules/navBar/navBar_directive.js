@@ -5,6 +5,9 @@ app.directive('navBar', function(){
     },
     templateUrl: 'html/navBar_directive.html',
     controller: ['$scope', function($scope){
+      $scope.submit = function(){
+        this.$$nextSibling.toggleButton();
+      };
     }]
   };
 });
