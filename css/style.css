@@ -7,6 +7,14 @@ body{
   background-attachment: fixed;
   padding-top: 125px;
 }
+#home-text{
+  color: white;
+}
+
+#home-text h1{
+  text-shadow: 1px 1px black;
+}
+
 #largeinputli{
   margin-top: 0;
 }

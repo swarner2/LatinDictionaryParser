@@ -21,10 +21,10 @@ function Noun(meaning, dictEntry, types, chapter, section){
 
 function test(x){
 	if(x === undefined){
-		console.log(self);
+		console.log('failed test: ' + self);
 		self.meaning = 'something was not defined, check how you entered the data for this word to fix it';
 	}
-	if(x.match(/\(/)){console.log(self);}
+	if(x.match(/\(/)){console.log('failed test: ' + self);}
 }
 	test(this.firstDict);
 	test(this.gender);

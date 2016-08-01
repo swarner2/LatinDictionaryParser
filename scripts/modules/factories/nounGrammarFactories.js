@@ -3,55 +3,62 @@ app.factory('nounUtilities', ['utilities',function(utilities){
 
   //pickNoun takes a string to check the type of a noun
   //any takes all nouns
-  nounUtilities.pickNoun = function(type){
+  //if more than one type can be present accept an array of the desired types.
+  var pickNoun = function(type){
     if (type === 'any') { return utilities.random(dictionary.nouns); }
+    //  if it is an array of types one will be randomly selected here
+    if (Array.isArray(type)){type = utilities.random(type);}
     return utilities.random(dictionary.nouns.filter( function(x){
       return x.types == type;
     }));
   };
 
-  nounUtilities.subject = function (){
-    var subject = nounUtilities.pickNoun('person');
-    var meaning = utilities.random(subject.meaning.split(', '));
-    subject.number = utilities.random(['sg', 'pl']);
-    subject.case = 'nominative';
-    //Nominative Singular is always show in the firstDict
-    if(subject.number === 'sg'){
-      subject.stem = subject.firstDict;
-      subject.ending = '';
-      subject.meaning = 'the ' + meaning + ' verbs';
-    }
-    else {
-      subject.meaning = 'the ' + meaning + 's verb';
-      subject.ending = grammar.nominative[subject.number][subject.declension + subject.gender];
-    }
-    return subject;
+ function NounCaseUse(nounCase, types, custom){
+   this.noun = pickNoun(types);
+   this.case = nounCase;
+   this.number = utilities.random(['sg','pl']);
+   this.meaning = utilities.random(this.noun.meaning.split(', '));
+   this.meaning = this.number === 'sg' ? ' the ' + this.meaning : ' the ' + this.meaning + 's';
+   this.gender = this.noun.gender;
+   this.stem = this.noun.stem;
+   this.declension = this.noun.declension;
+   if(this.gender === 'C'){this.gender = utilities.random(['M','F']);}
+   this.ending = grammar[this.case][this.number][this.declension + this.gender];
+   var that = this;
+    custom(that);
+    if(this.meaning.match(',')){
+    console.log(this);}
+    return this;
+ }
+
+ nounUtilities.subject = function(){
+   return new NounCaseUse('nominative', ['person','animal'], function(that){
+     if(that.number === 'sg'){
+       that.stem = '';
+       that.ending = that.noun.firstDict;
+       that.meaning = that.meaning + ' verbs';
+     }
+     else {
+       that.meaning = that.meaning + ' verb';
+       that.ending = grammar[that.case][that.number][that.declension + that.gender];
+     }
+  });
+};
+
+  nounUtilities.placeWhere = function(){
+    return new NounCaseUse('ablative', ['place'], function(that){
+      that.prep = ' in ';
+      that.meaning = that.prep + that.meaning;
+    });
   };
 
-  nounUtilities.placeWhere = function (){
-    var place = nounUtilities.pickNoun('place');
-    place.prep = ' in ';
-    var meaning = utilities.random(place.meaning.split(', '));
-    place.number = utilities.random(['sg', 'pl']);
-    place.case = 'ablative';
-    place.stem = place.stem;
-    place.ending = grammar.ablative[place.number][place.declension + place.gender];
-    place.meaning = place.number === 'sg' ? place.prep + ' the ' + meaning : place.prep + ' the ' + meaning + 's';
-    return place;
-  };
-
-  nounUtilities.directObject = function (){
-    var directObject = nounUtilities.pickNoun('any');
-    var meaning = utilities.random(directObject.meaning.split(', '));
-    directObject.number = utilities.random(['sg', 'pl']);
-    directObject.case = 'accusative';
-    directObject.ending = grammar.accusative[directObject.number][directObject.declension + directObject.gender];
-    if (directObject.ending === 'firstDict') {
-      directObject.stem = directObject.firstDict;
-      directObject.ending = '';
-    }
-    directObject.meaning = directObject.number === 'sg' ? ' the ' + meaning : ' the ' + meaning + 's';
-    return directObject;
+  nounUtilities.directObject = function(){
+    return new NounCaseUse('accusative','any',function(that){
+      if (that.ending === 'firstDict') {
+        that.stem = '';
+        that.ending = that.firstDict;
+      }
+    });
   };
 
   return nounUtilities;

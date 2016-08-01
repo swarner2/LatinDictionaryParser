@@ -11,7 +11,7 @@
     <ul id="largeinputli" class="nav navbar-nav navbar-right">
       <li  >
         <form ng-submit='submit()'>
-          <input type="text" name="name" class="form-control" value="searchText" ng-model="searchText">
+          <input type="text" name="name" class="form-control" value="searchText" ng-model="searchText" autocomplete="off">
           <span id='large-search-glyph' class="glyphicon glyphicon-search">
         </form>
         </li>
@@ -34,7 +34,7 @@
       <ul class="nav navbar-nav navbar-right">
           <li id="inputli">
             <form ng-submit='submit()'>
-              <input type="text" name="name" class="form-control" value=""  ng-model="searchText">
+              <input type="text" name="name" class="form-control" value=""  ng-model="searchText" autocomplete="off">
               <span id='search-glyph' class="glyphicon glyphicon-search">
             </form>
             </li>

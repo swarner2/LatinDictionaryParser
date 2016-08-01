@@ -53,7 +53,6 @@ app.controller('sentenceController', [
     //catch the prepositions
     if(noun === this.place.prep){noun = this.place;}
     //catch the endings
-      // console.log(this.sentence.english);
       var checkEnding = this.sentence.english.filter(function(v){
         return v.ending == noun;
       });
@@ -92,7 +91,6 @@ app.controller('sentenceController', [
 
 
   $scope.toggleButton = function(){
-    console.log(this);
     if($scope.buttonText === 'Show Answer'){
       $scope.latinStyle = {'visibility' : 'visible'};
       $scope.buttonText = 'Next Question';
