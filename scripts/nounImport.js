@@ -476,7 +476,7 @@ dictionary = {
       new Noun	("	interest, study	","	studium, -i	",["	feeling	"], "	XXXIII	",	1	),
       new Noun	("	punishment (s)	","	supplicium, -i	",["	thing	"], "	XXXI	",	2	),
       new Noun	("	syllable	","	syllaba, -ae	",["	thing	"], "	I	",	3	),
-      new Noun	("	writing-tablet	","	tabella, -ae	",["	place	"], "	XXI	",	3	),
+      new Noun	("	little writing-tablet	","	tabella, -ae	",["	place	"], "	XXI	",	3	),
       new Noun	("	letter carrier	","	tabellarius, -i	",["	person	"], "	XXII	",	1	),
       new Noun	("	shop	","	taberna, -ae	",["	place	"], "	VIII	",	1	),
       new Noun	("	shopkeeper	","	tabernarius, -i	",["	person	"], "	VIII	",	1	),

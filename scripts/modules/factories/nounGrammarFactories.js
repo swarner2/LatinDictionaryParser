@@ -4,13 +4,33 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   //pickNoun takes a string to check the type of a noun
   //any takes all nouns
   //if more than one type can be present accept an array of the desired types.
+  var usedWords = [];
   var pickNoun = function(type){
-    if (type === 'any') { return utilities.random(dictionary.nouns); }
+    var word;
+    if (type === 'any') {
+      word = utilities.random(dictionary.nouns);
+    }
     //  if it is an array of types one will be randomly selected here
-    if (Array.isArray(type)){type = utilities.random(type);}
-    return utilities.random(dictionary.nouns.filter( function(x){
-      return x.types == type;
-    }));
+    else if (Array.isArray(type)){
+      type = utilities.random(type);
+      word = utilities.random(dictionary.nouns.filter( function(x){
+        return x.types == type;
+      }));
+    }
+    // if one type is given get it here
+    else{
+      word = utilities.random(dictionary.nouns.filter( function(x){
+        return x.types == type;
+      }));
+    }
+    //if the word is already used in usedWords make a newWord
+    if(usedWords.indexOf(word) === -1){
+      usedWords.push(word);
+      return word;
+    }
+    else{
+      return pickNoun(type);
+    }
   };
 
  function NounCaseUse(nounCase, types, custom, test, testNoun){
@@ -60,12 +80,6 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     });
   };
 
-//stop repeat words used
-var wordsUsed = [];
-function checkUsed(word){
-
-}
-
 nounUtilities.transitiveSentence = function(){
   this.subject = nounUtilities.subject();
   this.placeWhere = nounUtilities.placeWhere();
@@ -80,6 +94,7 @@ nounUtilities.transitiveSentence = function(){
     this.directObject.stem,
     this.directObject.ending + " ",
   ];
+  usedWords = [];
   return this;
 };
   return nounUtilities;
