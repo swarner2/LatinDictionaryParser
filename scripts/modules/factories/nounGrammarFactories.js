@@ -13,8 +13,9 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     }));
   };
 
- function NounCaseUse(nounCase, types, custom){
+ function NounCaseUse(nounCase, types, custom, test, testNoun){
    this.noun = pickNoun(types);
+   if(test){this.noun = testNoun;}
    this.case = nounCase;
    this.number = utilities.random(['sg','pl']);
    this.meaning = utilities.random(this.noun.meaning.split(', '));
@@ -26,8 +27,6 @@ app.factory('nounUtilities', ['utilities',function(utilities){
    this.ending = grammar[this.case][this.number][this.declension + this.gender];
    var that = this;
     custom(that);
-    if(this.meaning.match(',')){
-    console.log(this);}
     return this;
  }
 
@@ -61,5 +60,27 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     });
   };
 
+//stop repeat words used
+var wordsUsed = [];
+function checkUsed(word){
+
+}
+
+nounUtilities.transitiveSentence = function(){
+  this.subject = nounUtilities.subject();
+  this.placeWhere = nounUtilities.placeWhere();
+  this.directObject = nounUtilities.directObject();
+  this.english = [this.subject, this.directObject, this.placeWhere ];
+  this.latin = [
+    this.subject.stem,
+    this.subject.ending + " " ,
+    this.placeWhere.prep,
+    this.placeWhere.stem,
+    this.placeWhere.ending + " ",
+    this.directObject.stem,
+    this.directObject.ending + " ",
+  ];
+  return this;
+};
   return nounUtilities;
 }]);

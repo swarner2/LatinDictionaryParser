@@ -10,24 +10,10 @@ app.controller('sentenceController', [
   '$scope','utilities', 'nounUtilities', '$rootScope',
   function($scope, utilities, nounUtilities, $rootScope){
 
-  var randomNumber = utilities.random(['sg', 'pl']);
   $scope.helperText = {'visibility' : 'hidden'};
   $scope.nouns = dictionary.nouns;
-  $scope.subject = nounUtilities.subject();
-  $scope.placeWhere = nounUtilities.placeWhere();
-  $scope.directObject = nounUtilities.directObject();
-  $scope.sentence = {
-      latin : [
-        $scope.subject.stem,
-        $scope.subject.ending + " " ,
-        $scope.placeWhere.prep,
-        $scope.placeWhere.stem,
-        $scope.placeWhere.ending + " ",
-        $scope.directObject.stem,
-        $scope.directObject.ending + " ",
-      ],
-      english : [$scope.subject, $scope.directObject, $scope.placeWhere ],
-  };
+
+  $scope.sentence = new nounUtilities.transitiveSentence($scope);
 
   $scope.test = function(input){
     var correctness = true;
@@ -51,11 +37,15 @@ app.controller('sentenceController', [
 
   $scope.getHelp = function(noun, bool){
     //catch the prepositions
-    if(noun === this.placeWhere.prep){noun = this.placeWhere;}
+    if(noun === this.sentence.placeWhere.prep){
+      noun = this.sentence.placeWhere;
+    }
+
     //catch the endings
       var checkEnding = this.sentence.english.filter(function(v){
         return v.ending == noun;
       });
+
     //catch the stems
     if(typeof noun === 'string'){
         noun = this.sentence.english.filter(function(v){
@@ -73,7 +63,6 @@ app.controller('sentenceController', [
         return v.stem == stem;
       })[0];
       var noun = {};
-      console.log(endingInfo);
       noun.gender = endingInfo.gender;
       noun.number = endingInfo.number;
       noun.case = endingInfo.case;
@@ -81,6 +70,8 @@ app.controller('sentenceController', [
     }
 
     $scope.help = isEnding === true ? noun : noun.noun;
+
+    //set visibility of the card
     $scope.helperText = {
       "visibility" : 'hidden'
     };
@@ -101,23 +92,10 @@ app.controller('sentenceController', [
     }
     else {
       $scope.buttonText = 'Show Answer';
-      $scope.subject = nounUtilities.subject();
-      $scope.placeWhere = nounUtilities.placeWhere();
-      $scope.directObject = nounUtilities.directObject();
-      $scope.sentence.latin = [
-        $scope.subject.stem,
-        $scope.subject.ending + " " ,
-        $scope.placeWhere.prep,
-        $scope.placeWhere.stem,
-        $scope.placeWhere.ending + " ",
-        $scope.directObject.stem,
-        $scope.directObject.ending + " ",
-      ];
-      $scope.sentence.english = [$scope.subject, $scope.directObject, $scope.placeWhere ];
+      $scope.sentence = new nounUtilities.transitiveSentence($scope);
       $rootScope.searchText = '';
       $scope.latinStyle = {'visibility' : 'hidden'};
       $rootScope.$digest();
-
     }
   };
 }]);
