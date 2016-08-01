@@ -14,19 +14,19 @@ app.controller('sentenceController', [
   $scope.helperText = {'visibility' : 'hidden'};
   $scope.nouns = dictionary.nouns;
   $scope.subject = nounUtilities.subject();
-  $scope.place = nounUtilities.placeWhere();
+  $scope.placeWhere = nounUtilities.placeWhere();
   $scope.directObject = nounUtilities.directObject();
   $scope.sentence = {
       latin : [
         $scope.subject.stem,
         $scope.subject.ending + " " ,
-        $scope.place.prep,
-        $scope.place.stem,
-        $scope.place.ending + " ",
+        $scope.placeWhere.prep,
+        $scope.placeWhere.stem,
+        $scope.placeWhere.ending + " ",
         $scope.directObject.stem,
         $scope.directObject.ending + " ",
       ],
-      english : [$scope.subject, $scope.directObject, $scope.place ],
+      english : [$scope.subject, $scope.directObject, $scope.placeWhere ],
   };
 
   $scope.test = function(input){
@@ -51,7 +51,7 @@ app.controller('sentenceController', [
 
   $scope.getHelp = function(noun, bool){
     //catch the prepositions
-    if(noun === this.place.prep){noun = this.place;}
+    if(noun === this.placeWhere.prep){noun = this.placeWhere;}
     //catch the endings
       var checkEnding = this.sentence.english.filter(function(v){
         return v.ending == noun;
@@ -62,21 +62,25 @@ app.controller('sentenceController', [
           return v.stem == noun;
         })[0];
     }
+
     //catch the endings
     //they start out as undefined from catch the stems
+    var isEnding = false;
     if(noun === undefined){
+      isEnding = true;
       stem = this.$$prevSibling.nounPart;
       endingInfo = this.sentence.english.filter(function(v){
         return v.stem == stem;
       })[0];
       var noun = {};
-      noun.firstDict = this.nounPart;
+      console.log(endingInfo);
       noun.gender = endingInfo.gender;
       noun.number = endingInfo.number;
       noun.case = endingInfo.case;
       noun.declension = endingInfo.declension;
     }
-    $scope.help = noun;
+
+    $scope.help = isEnding === true ? noun : noun.noun;
     $scope.helperText = {
       "visibility" : 'hidden'
     };
@@ -98,18 +102,18 @@ app.controller('sentenceController', [
     else {
       $scope.buttonText = 'Show Answer';
       $scope.subject = nounUtilities.subject();
-      $scope.place = nounUtilities.placeWhere();
+      $scope.placeWhere = nounUtilities.placeWhere();
       $scope.directObject = nounUtilities.directObject();
       $scope.sentence.latin = [
         $scope.subject.stem,
         $scope.subject.ending + " " ,
-        $scope.place.prep,
-        $scope.place.stem,
-        $scope.place.ending + " ",
+        $scope.placeWhere.prep,
+        $scope.placeWhere.stem,
+        $scope.placeWhere.ending + " ",
         $scope.directObject.stem,
         $scope.directObject.ending + " ",
       ];
-      $scope.sentence.english = [$scope.subject, $scope.directObject, $scope.place ];
+      $scope.sentence.english = [$scope.subject, $scope.directObject, $scope.placeWhere ];
       $rootScope.searchText = '';
       $scope.latinStyle = {'visibility' : 'hidden'};
       $rootScope.$digest();
