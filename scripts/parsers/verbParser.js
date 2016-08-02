@@ -25,7 +25,7 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   }
 
   //capture special cases
-  findTrailingCase = new RegExp("(?:us\\s)(\\w\\w\\w)$");
+  var findTrailingCase = new RegExp("(?:us\\s)(\\w\\w\\w)$");
   if (this.dictionaryEntry.match(findTrailingCase)) {
     //stop deponents
     if (this.dictionaryEntry.match(findTrailingCase)[1] === 'sum') {}

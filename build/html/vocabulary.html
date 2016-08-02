@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
       <ul class="col-xs-12">
-        <li class="container" ng-repeat="noun in nouns | filter:$parent.searchText | limitTo:20 | orderBy:firstDict">
+        <li class="container" ng-repeat="word in words | filter:$parent.searchText | limitTo:20 | orderBy:dictionaryEntry" >
           <div class="row">
             <h4 class="col-xs-12">
-              <b>{{noun.firstDict + ": "}}</b><i> {{noun.meaning}}</i>
+              <b>{{word.dictionaryEntry + ": "}}</b><i> {{word.meaning}}</i>
             </h4>
-            <div class="col-xs-12" ng-repeat='(attribute, value) in noun'>
+            <div class="col-xs-12" ng-repeat='(attribute, value) in word'>
               <b>{{attribute + ": "}}</b> {{formatValue(attribute, value, noun)}}
             </div>
           </div>
