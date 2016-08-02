@@ -1,25 +1,25 @@
 app.factory('nounUtilities', ['utilities',function(utilities){
   var nounUtilities = {};
 
-  //pickNoun takes a string to check the type of a noun
+  //pickWord takes a string to check the type of a noun
   //any takes all nouns
   //if more than one type can be present accept an array of the desired types.
   var usedWords = [];
-  var pickNoun = function(type){
+  var pickWord = function(type, partOfSpeech){
     var word;
     if (type === 'any') {
-      word = utilities.random(dictionary.nouns);
+      word = utilities.random(dictionary[partOfSpeech]);
     }
     //  if it is an array of types one will be randomly selected here
     else if (Array.isArray(type)){
       type = utilities.random(type);
-      word = utilities.random(dictionary.nouns.filter( function(x){
+      word = utilities.random(dictionary[partOfSpeech].filter( function(x){
         return x.types == type;
       }));
     }
     // if one type is given get it here
     else{
-      word = utilities.random(dictionary.nouns.filter( function(x){
+      word = utilities.random(dictionary[partOfSpeech].filter( function(x){
         return x.types == type;
       }));
     }
@@ -29,12 +29,12 @@ app.factory('nounUtilities', ['utilities',function(utilities){
       return word;
     }
     else{
-      return pickNoun(type);
+      return pickWord(type, partOfSpeech);
     }
   };
 
  function NounCaseUse(nounCase, types, custom, test, testNoun){
-   this.noun = pickNoun(types);
+   this.noun = pickWord(types, 'nouns');
    if(test){this.noun = testNoun;}
    this.case = nounCase;
    this.number = utilities.random(['sg','pl']);
@@ -81,7 +81,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   };
 
 function verb(type, subjectNumber, voice, person){
-  
+
   if (person === undefined) { this.person = 'third';}
 }
 
