@@ -17,6 +17,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
         return x.types == type;
       }));
     }
+
     // if one type is given get it here
     else{
       word = utilities.random(dictionary[partOfSpeech].filter( function(x){
@@ -39,7 +40,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
    this.case = nounCase;
    this.number = utilities.random(['sg','pl']);
    this.meaning = utilities.random(this.noun.meaning.split(', '));
-   this.meaning = this.number === 'sg' ? ' the ' + this.meaning : ' the ' + this.meaning + 's';
+   this.meaning = this.number === 'sg' ? ' the ' + this.meaning + ' ' : ' the ' + this.meaning + 's ';
    this.gender = this.noun.gender;
    this.stem = this.noun.stem;
    this.declension = this.noun.declension;
@@ -55,10 +56,8 @@ app.factory('nounUtilities', ['utilities',function(utilities){
      if(that.number === 'sg'){
        that.stem = '';
        that.ending = that.noun.firstDict;
-       that.meaning = that.meaning + ' verbs';
      }
      else {
-       that.meaning = that.meaning + ' verb';
        that.ending = grammar[that.case][that.number][that.declension + that.gender];
      }
   });
@@ -80,16 +79,52 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     });
   };
 
-function verb(type, subjectNumber, voice, person){
-
+function Verb(type, subjectNumber, tense , voice, person){
+  this.verb = pickWord(type, 'verbs');
   if (person === undefined) { this.person = 'third';}
+  else {this.person = person; }
+  this.meaning = this.verb.meaning;
+  //fix standard definition from "to verb" -> "verb"
+    if (this.meaning.match('to ')) {
+      this.meaning = this.meaning.replace('to ', '');
+    }
+  this.tense = tense;
+  this.voice = voice;
+  this.number = subjectNumber;
+    //change meaning if plural
+    if(this.number === 'pl'){
+      this.meaning = this.meaning + "s ";
+    }
+  this.ending = grammar.verbs.personalEndings[this.tense][this.voice][this.person + "Person"  + this.number];
+  this.connectingVowel = grammar.verbs.connectingVowels[this.tense][this.verb.conjugation];
+  //stop int combination
+    if (this.ending === 'nt' && this.connectingVowel === 'i') {
+      switch (this.verb.conjugation) {
+        case 'third':
+            this.connectingVowel = 'u';
+          break;
+        case 'thirdIo':
+        this.connectingVowel = 'iu';
+          break;
+        case 'fourth':
+        this.connectingVowel = 'iu';
+          break;
+        default:
+        console.log('Error, passed through stop int but did not change: ' + this.verb.dictionaryEntry);
+      }
+    }
+    return this;
 }
+
+var newVerb = new Verb('t', utilities.random(['sg','pl']),'present', 'active');
+console.log(newVerb);
 
 nounUtilities.transitiveSentence = function(){
   this.subject = subject();
+  this.verb = new Verb('t', utilities.random(['sg','pl']),'present', 'active');
   this.placeWhere = placeWhere();
   this.directObject = directObject();
-  this.english = [this.subject, this.directObject, this.placeWhere ];
+  this.english = [this.subject, this.verb, this.directObject, this.placeWhere ];
   this.latin = [
     this.subject.stem,
     this.subject.ending + " " ,
@@ -98,6 +133,9 @@ nounUtilities.transitiveSentence = function(){
     this.placeWhere.ending + " ",
     this.directObject.stem,
     this.directObject.ending + " ",
+    this.verb.verb.presentStem,
+    this.verb.connectingVowel,
+    this.verb.ending
   ];
   usedWords = [];
   return this;

@@ -3,7 +3,7 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   this.chapter = chapter.replace(/(\s\s)*/g, '').trim();
   this.section = section;
   this.meaning = definition.replace(/(\s\s)*/g, '').trim();
-  this.type = type.replace(/(\s\s)*/g, '').trim();
+  this.types = type.replace(/(\s\s)*/g, '').trim();
   this.deponent = false;
   this.dictionaryEntry = dictionaryEntry.replace(/(\s\s)*/g, '').trim();
 
@@ -118,6 +118,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   test(this.participleStem);
   test(this.meaning);
   test(this.conjugation);
-  test(this.type);
+  test(this.types);
 
 }
