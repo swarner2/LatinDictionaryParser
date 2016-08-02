@@ -84,6 +84,13 @@ function Verb(type, subjectNumber, tense , voice, person){
   if (person === undefined) { this.person = 'third';}
   else {this.person = person; }
   this.meaning = this.verb.meaning;
+  //pick one of the meanings
+  //clean first
+  if (this.meaning.match(/;|:/)) {
+    this.meaning = this.meaning.replace(/;|:/g, ',');
+  }
+  this.meaning = utilities.random(this.meaning.split(', '));
+
   //fix standard definition from "to verb" -> "verb"
     if (this.meaning.match('to ')) {
       this.meaning = this.meaning.replace('to ', '');
@@ -92,7 +99,7 @@ function Verb(type, subjectNumber, tense , voice, person){
   this.voice = voice;
   this.number = subjectNumber;
     //change meaning if plural
-    if(this.number === 'pl'){
+    if(this.number === 'sg'){
       this.meaning = this.meaning + "s ";
     }
   this.ending = grammar.verbs.personalEndings[this.tense][this.voice][this.person + "Person"  + this.number];
@@ -121,7 +128,7 @@ console.log(newVerb);
 
 nounUtilities.transitiveSentence = function(){
   this.subject = subject();
-  this.verb = new Verb('t', utilities.random(['sg','pl']),'present', 'active');
+  this.verb = new Verb('t', this.subject.number ,'present', 'active');
   this.placeWhere = placeWhere();
   this.directObject = directObject();
   this.english = [this.subject, this.verb, this.directObject, this.placeWhere ];
