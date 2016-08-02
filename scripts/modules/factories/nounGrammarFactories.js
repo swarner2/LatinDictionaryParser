@@ -50,7 +50,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     return this;
  }
 
- nounUtilities.subject = function(){
+ subject = function(){
    return new NounCaseUse('nominative', ['person','animal'], function(that){
      if(that.number === 'sg'){
        that.stem = '';
@@ -64,14 +64,14 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   });
 };
 
-  nounUtilities.placeWhere = function(){
+  placeWhere = function(){
     return new NounCaseUse('ablative', ['place'], function(that){
       that.prep = ' in ';
       that.meaning = that.prep + that.meaning;
     });
   };
 
-  nounUtilities.directObject = function(){
+  directObject = function(){
     return new NounCaseUse('accusative','any',function(that){
       if (that.ending === 'firstDict') {
         that.stem = '';
@@ -81,9 +81,9 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   };
 
 nounUtilities.transitiveSentence = function(){
-  this.subject = nounUtilities.subject();
-  this.placeWhere = nounUtilities.placeWhere();
-  this.directObject = nounUtilities.directObject();
+  this.subject = subject();
+  this.placeWhere = placeWhere();
+  this.directObject = directObject();
   this.english = [this.subject, this.directObject, this.placeWhere ];
   this.latin = [
     this.subject.stem,

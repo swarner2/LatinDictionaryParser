@@ -19,7 +19,7 @@ app.controller('sentenceController', [
     var correctness = true;
     if(input === undefined){
       $scope.answerStyle = {'text-shadow' : '1px 5px 13px black'};
-      return 'Type into the Search Box to answer the Qeustion!';
+      return 'Type into the Search Box to answer the Question!';
     }
     input = input.trim().replace(/\s\s*/g,' ').split('');
     answer = $scope.sentence.latin.join('').trim().replace(/\s\s*/g, ' ').split('');
