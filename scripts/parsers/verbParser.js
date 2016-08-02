@@ -6,7 +6,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   this.type = type.replace(/(\s\s)*/g, '').trim();
   this.deponent = false;
   this.dictionaryEntry = dictionaryEntry.replace(/(\s\s)*/g, '').trim();
-  console.log(this);
 
   //dictionary entry parsing
 
@@ -30,7 +29,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
     //stop deponents
     if (this.dictionaryEntry.match(findTrailingCase)[1] === 'sum') {}
     else {
-      console.log('here');
       this.directObject = this.dictionaryEntry.match(findTrailingCase)[1];
       this.dictionaryEntry = this.dictionaryEntry.replace(this.directObject, '').trim();
     }
@@ -45,6 +43,9 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
       this.conjugation = 'first';
       break;
     case 'eo : ere':
+    this.conjugation = 'second';
+      break;
+    case 'eo : Ere':
     this.conjugation = 'second';
       break;
     case 'o : ere':
@@ -64,6 +65,10 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
     this.conjugation = 'second';
     this.deponent = true;
       break;
+    case 'eor : Eri':
+    this.conjugation = 'second';
+    this.deponent = true;
+      break;
     case 'or : i':
     this.conjugation = 'third';
     this.deponent = true;
@@ -77,7 +82,7 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
     this.deponent = true;
       break;
     default:
-     console.log(this + "is irregular or didn't pass through conjugation logic");
+     console.log(this.dictionaryEntry + "is irregular or didn't pass through conjugation logic");
   }
 
   //present stem
@@ -104,7 +109,7 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
 
   function test(x){
   	if(x === undefined){
-  		console.log('failed test: ' + this);
+  		console.log('failed test: ' + this.dictionaryEntry);
   		self.meaning = 'something was not defined, check how you entered the data for this word to fix it';
   	}
   }

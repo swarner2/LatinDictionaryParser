@@ -80,6 +80,11 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     });
   };
 
+function verb(type, subjectNumber, voice, person){
+  
+  if (person === undefined) { this.person = 'third';}
+}
+
 nounUtilities.transitiveSentence = function(){
   this.subject = subject();
   this.placeWhere = placeWhere();
