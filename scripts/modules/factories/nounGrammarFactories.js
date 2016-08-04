@@ -34,11 +34,9 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     }
   };
 
- function NounCaseUse(nounCase, types, custom, test, testNoun){
-
+ function NounCaseUse(nounCase, types, custom){
    this.noun = pickWord(types, 'nouns');
 
-   if(test){this.noun = testNoun;}
    this.ending = {
      case : nounCase,
      number : utilities.random(['sg','pl']),
@@ -51,7 +49,6 @@ app.factory('nounUtilities', ['utilities',function(utilities){
    };
    this.stem.english = this.ending.number === 'sg' ? ' the ' + this.stem.english + ' ' : ' the ' + this.stem.english + 's ';
 
-
    if(this.stem.gender === 'C'){this.stem.gender = utilities.random(['M','F']);}
    this.ending.latin = grammar[this.ending.case][this.ending.number][this.stem.declension + this.stem.gender] + " ";
 
@@ -60,7 +57,6 @@ app.factory('nounUtilities', ['utilities',function(utilities){
 
   //catch if ending is 'firstDict'
   if (this.ending.latin === 'firstDict ') {
-    console.log('firstDict ');
     this.stem.latin = '';
     this.ending.latin = this.noun.firstDict + " ";
   }
@@ -69,7 +65,11 @@ app.factory('nounUtilities', ['utilities',function(utilities){
  }
 
  subject = function(){
-   return new NounCaseUse('nominative', ['person','animal'], function(){});
+   return new NounCaseUse('nominative', ['person','animal'], function(that){
+     if(that.noun.declension === 'second' && that.noun.firstDict.match(/r$/)){
+       that.ending.latin = 'firstDict ';
+     }
+   });
 };
 
   placeWhere = function(){
