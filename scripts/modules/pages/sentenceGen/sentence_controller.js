@@ -13,7 +13,6 @@ app.controller('sentenceController', [
   $scope.helperText = {'visibility' : 'hidden'};
 
   $scope.sentence = new nounUtilities.transitiveSentence($scope);
-
   $scope.test = function(input){
     var correctness = true;
     if(input === undefined){
@@ -21,7 +20,12 @@ app.controller('sentenceController', [
       return 'Type into the Search Box to answer the Question!';
     }
     input = input.trim().replace(/\s\s*/g,' ').split('');
-    answer = $scope.sentence.latin.join('').trim().replace(/\s\s*/g, ' ').split('');
+
+    answer = $scope.sentence.latin
+      .map(function(wordPart){return wordPart.latin;})
+      .join('').trim()
+      .replace(/\s\s*/g, ' ')
+      .split('');
     input.forEach(function(letter, i){
        if(letter !== answer[i]){correctness = false;}
     });
@@ -34,40 +38,40 @@ app.controller('sentenceController', [
     return input.join('');
   };
   $scope.getHelp = function(noun, bool){
-      console.log(this.word);
+      // console.log(this.word);
     $scope.word = this.word;
     if ('noun' in this.word) {
-      console.log('noun');
+      // console.log('noun');
       $scope.title = this.word.noun.dictionaryEntry.trim() + ": " ;
       $scope.titleInfo = this.word.noun.meaning;
       $scope.info = this.word.noun;
     }
     else if ('verb' in this.word) {
-      console.log('verb');
+      // console.log('verb');
       $scope.title = this.word.verb.dictionaryEntry.trim() + ": ";
       $scope.titleInfo = this.word.verb.meaning;
       $scope.info = this.word.verb;
     }
     else if ('case' in this.word) {
-      console.log('noun: ending');
+      // console.log('noun: ending');
       $scope.title = this.word.case.trim();
       $scope.titleInfo = "";
       $scope.info = this.word;
     }
     else if ('gender' in this.word) {
-      console.log('noun: stem');
+      // console.log('noun: stem');
       $scope.title = this.word.english.trim();
       $scope.titleInfo = "";
       $scope.info = this.word;
     }
     else if ('tense' in this.word) {
-      console.log('verb: stem');
+      // console.log('verb: stem');
       $scope.title = this.word.english.trim() + ": ";
       $scope.titleInfo = this.word.tense.trim();
       $scope.info = this.word;
     }
     else if ('connectingVowel' in this.word) {
-      console.log('verb: ending');
+      // console.log('verb: ending');
       $scope.title = this.word.number.trim() + ": ";
       $scope.titleInfo = this.word.person;
       $scope.info = this.word;
