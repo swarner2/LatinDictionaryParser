@@ -10,8 +10,7 @@ app.controller('sentenceController', [
   '$scope','utilities', 'nounUtilities', '$rootScope',
   function($scope, utilities, nounUtilities, $rootScope){
 
-  // $scope.helperText = {'visibility' : 'hidden'};
-  $scope.nouns = dictionary.nouns;
+  $scope.helperText = {'visibility' : 'hidden'};
 
   $scope.sentence = new nounUtilities.transitiveSentence($scope);
 
@@ -35,8 +34,44 @@ app.controller('sentenceController', [
     return input.join('');
   };
   $scope.getHelp = function(noun, bool){
-      console.log(this);
-
+      console.log(this.word);
+    $scope.word = this.word;
+    if ('noun' in this.word) {
+      console.log('noun');
+      $scope.title = this.word.noun.dictionaryEntry.trim() + ": " ;
+      $scope.titleInfo = this.word.noun.meaning;
+      $scope.info = this.word.noun;
+    }
+    else if ('verb' in this.word) {
+      console.log('verb');
+      $scope.title = this.word.verb.dictionaryEntry.trim() + ": ";
+      $scope.titleInfo = this.word.verb.meaning;
+      $scope.info = this.word.verb;
+    }
+    else if ('case' in this.word) {
+      console.log('noun: ending');
+      $scope.title = this.word.case.trim();
+      $scope.titleInfo = "";
+      $scope.info = this.word;
+    }
+    else if ('gender' in this.word) {
+      console.log('noun: stem');
+      $scope.title = this.word.english.trim();
+      $scope.titleInfo = "";
+      $scope.info = this.word;
+    }
+    else if ('tense' in this.word) {
+      console.log('verb: stem');
+      $scope.title = this.word.english.trim() + ": ";
+      $scope.titleInfo = this.word.tense.trim();
+      $scope.info = this.word;
+    }
+    else if ('connectingVowel' in this.word) {
+      console.log('verb: ending');
+      $scope.title = this.word.number.trim() + ": ";
+      $scope.titleInfo = this.word.person;
+      $scope.info = this.word;
+    }
 
     // //catch the prepositions
     // if(noun === this.sentence.placeWhere.prep){
@@ -74,16 +109,16 @@ app.controller('sentenceController', [
     // $scope.help = isEnding === true ? noun : noun.noun;
     //
     // //set visibility of the card
-    // $scope.helperText = {
-    //   "visibility" : 'hidden'
-    // };
-    // if (bool) {
-    //   $scope.helperText = {
-    //     "visibility" : 'visable'
-    //   };
-    // }
+    $scope.helperText = {
+      "visibility" : 'hidden'
+    };
+    if (bool) {
+      $scope.helperText = {
+        "visibility" : 'visable'
+      };
+    }
   };
-//  $scope.latinStyle = {'visibility' : 'hidden'};
+ $scope.latinStyle = {'visibility' : 'hidden'};
   $scope.buttonText = 'Show Answer';
 
 
