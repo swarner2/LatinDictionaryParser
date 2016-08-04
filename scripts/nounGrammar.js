@@ -1,19 +1,19 @@
 var grammar = {
   nominative: {
     sg:{
-      firstF: 'firstDict',
-      firstM: 'firstDict',
-      secondM: 'firstDict',
+      firstF: 'a',
+      firstM: 'a',
+      secondM: 'us',
       secondN: 'firstDict',
-      secondF: 'firstDict',
+      secondF: 'us',
       thirdF: 'firstDict',
       thirdM: 'firstDict',
       thirdN: 'firstDict',
-      fourthF: 'firstDict',
-      fourthM: 'firstDict',
-      fourthN: 'firstDict',
-      fifthM: 'firstDict',
-      fifthF: 'firstDict',
+      fourthF: 'us',
+      fourthM: 'us',
+      fourthN: 'U',
+      fifthM: 'Es',
+      fifthF: 'Es',
     },
     pl:{
       firstF: 'ae',
