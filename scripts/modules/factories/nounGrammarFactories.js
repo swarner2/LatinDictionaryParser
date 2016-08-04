@@ -35,114 +35,140 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   };
 
  function NounCaseUse(nounCase, types, custom, test, testNoun){
+
    this.noun = pickWord(types, 'nouns');
+
    if(test){this.noun = testNoun;}
-   this.case = nounCase;
-   this.number = utilities.random(['sg','pl']);
-   this.meaning = utilities.random(this.noun.meaning.split(', '));
-   this.meaning = this.number === 'sg' ? ' the ' + this.meaning + ' ' : ' the ' + this.meaning + 's ';
-   this.gender = this.noun.gender;
-   this.stem = this.noun.stem;
-   this.declension = this.noun.declension;
-   if(this.gender === 'C'){this.gender = utilities.random(['M','F']);}
-   this.ending = grammar[this.case][this.number][this.declension + this.gender];
+   this.ending = {
+     case : nounCase,
+     number : utilities.random(['sg','pl']),
+   };
+   this.stem = {
+     english : utilities.random(this.noun.meaning.split(', ')),
+     gender : this.noun.gender,
+     declension : this.noun.declension,
+     latin : this.noun.stem,
+   };
+   this.stem.english = this.ending.number === 'sg' ? ' the ' + this.stem.english + ' ' : ' the ' + this.stem.english + 's ';
+
+
+   if(this.stem.gender === 'C'){this.stem.gender = utilities.random(['M','F']);}
+   this.ending.latin = grammar[this.ending.case][this.ending.number][this.stem.declension + this.stem.gender] + " ";
+
    var that = this;
-    custom(that);
+   custom(that);
+
+  //catch if ending is 'firstDict'
+  if (this.ending.latin === 'firstDict ') {
+    console.log('firstDict ');
+    this.stem.latin = '';
+    this.ending.latin = this.noun.firstDict + " ";
+  }
+
     return this;
  }
 
  subject = function(){
-   return new NounCaseUse('nominative', ['person','animal'], function(that){
-     if(that.number === 'sg'){
-       that.stem = '';
-       that.ending = that.noun.firstDict;
-     }
-     else {
-       that.ending = grammar[that.case][that.number][that.declension + that.gender];
-     }
-  });
+   return new NounCaseUse('nominative', ['person','animal'], function(){});
 };
 
   placeWhere = function(){
     return new NounCaseUse('ablative', ['place'], function(that){
-      that.prep = ' in ';
-      that.meaning = that.prep + that.meaning;
+      that.prep = 'in ';
+      that.stem.latin = that.prep + that.stem.latin;
+      that.stem.english = that.prep + that.stem.english;
     });
   };
 
   directObject = function(){
-    return new NounCaseUse('accusative','any',function(that){
-      if (that.ending === 'firstDict') {
-        that.stem = '';
-        that.ending = that.firstDict;
-      }
-    });
+    return new NounCaseUse('accusative','any',function(){});
   };
 
 function Verb(type, subjectNumber, tense , voice, person){
   this.verb = pickWord(type, 'verbs');
-  if (person === undefined) { this.person = 'third';}
-  else {this.person = person; }
-  this.meaning = this.verb.meaning;
-  //pick one of the meanings
-  //clean first
-  if (this.meaning.match(/;|:/)) {
-    this.meaning = this.meaning.replace(/;|:/g, ',');
-  }
-  this.meaning = utilities.random(this.meaning.split(', '));
+  this.stem = {
+    english : this.verb.meaning,
+    tense : tense,
+    latin : this.verb.presentStem,
+  };
+  this.ending = {
+    person : person,
+    number : subjectNumber,
+    voice : voice,
 
-  //fix standard definition from "to verb" -> "verb"
-    if (this.meaning.match('to ')) {
-      this.meaning = this.meaning.replace('to ', '');
-    }
-  this.tense = tense;
-  this.voice = voice;
-  this.number = subjectNumber;
-    //change meaning if plural
-    if(this.number === 'sg'){
-      this.meaning = this.meaning + "s ";
-    }
-  this.ending = grammar.verbs.personalEndings[this.tense][this.voice][this.person + "Person"  + this.number];
-  this.connectingVowel = grammar.verbs.connectingVowels[this.tense][this.verb.conjugation];
+  };
+  //set person to third if not given
+  if (person === undefined) { this.ending.person = 'third';}
+
+  //pick one of the englishs but clean it first
+  if (this.stem.english.match(/;|:/)) {
+    this.stem.english = this.stem.english.replace(/;|:/g, ',');
+  }
+  this.stem.english = utilities.random(this.stem.english.split(', '));
+
+  //fix standard english from "to verb" -> "verb"
+  if (this.stem.english.match('to ')) {
+    this.stem.english = this.stem.english.replace('to ', '');
+  }
+
+  //change english if plural
+  if(this.stem.number === 'sg'){
+    this.stem.english = this.stem.english + "s ";
+  }
+  //get ending
+  this.ending.personalEnding = grammar.verbs.personalEndings[this.stem.tense][this.ending.voice][this.ending.person + "Person"  + this.ending.number];
+
+  //get connecting vowel
+  this.ending.connectingVowel = grammar.verbs.connectingVowels[this.stem.tense][this.verb.conjugation];
+
   //stop int combination
-    if (this.ending === 'nt' && this.connectingVowel === 'i') {
-      switch (this.verb.conjugation) {
-        case 'third':
-            this.connectingVowel = 'u';
-          break;
-        case 'thirdIo':
-        this.connectingVowel = 'iu';
-          break;
-        case 'fourth':
-        this.connectingVowel = 'iu';
-          break;
-        default:
-        console.log('Error, passed through stop int but did not change: ' + this.verb.dictionaryEntry);
-      }
+  if (this.ending.personalEnding === 'nt' && this.ending.connectingVowel === 'i') {
+    switch (this.verb.conjugation) {
+      case 'third':
+          this.ending.connectingVowel = 'u';
+        break;
+      case 'thirdIo':
+      this.ending.connectingVowel = 'iu';
+        break;
+      case 'fourth':
+      this.ending.connectingVowel = 'iu';
+        break;
+      default:
+      console.log('Error, passed through stop int but did not change: ' + this.verb.dictionaryEntry);
     }
-    return this;
+  }
+
+  this.ending.latin = this.ending.connectingVowel + this.ending.personalEnding;
+  return this;
 }
 
 var newVerb = new Verb('t', utilities.random(['sg','pl']),'present', 'active');
 
 nounUtilities.transitiveSentence = function(){
   this.subject = subject();
-  this.verb = new Verb('t', this.subject.number ,'present', 'active');
+  this.verb = new Verb('t', this.subject.ending.number ,'present', 'active');
   this.placeWhere = placeWhere();
   this.directObject = directObject();
   this.english = [this.subject, this.verb, this.directObject, this.placeWhere ];
   this.latin = [
-    this.subject.stem,
-    this.subject.ending + " " ,
-    this.placeWhere.prep,
-    this.placeWhere.stem,
-    this.placeWhere.ending + " ",
-    this.directObject.stem,
-    this.directObject.ending + " ",
-    this.verb.verb.presentStem,
-    this.verb.connectingVowel,
-    this.verb.ending
+    this.subject.stem, this.subject.ending,
+    this.placeWhere.stem, this.placeWhere.ending,
+    this.directObject.stem, this.directObject.ending,
+    this.verb.stem, this.verb.ending,
   ];
+
+  // this.latin = [
+  //   this.subject.stem,
+  //   this.subject.ending + " " ,
+  //   this.placeWhere.prep,
+  //   this.placeWhere.stem,
+  //   this.placeWhere.ending + " ",
+  //   this.directObject.stem,
+  //   this.directObject.ending + " ",
+  //   this.verb.verb.presentStem,
+  //   this.verb.connectingVowel,
+  //   this.verb.ending
+  // ];
   usedWords = [];
   return this;
 };

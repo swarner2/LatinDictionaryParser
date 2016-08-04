@@ -10,7 +10,7 @@ app.controller('sentenceController', [
   '$scope','utilities', 'nounUtilities', '$rootScope',
   function($scope, utilities, nounUtilities, $rootScope){
 
-  $scope.helperText = {'visibility' : 'hidden'};
+  // $scope.helperText = {'visibility' : 'hidden'};
   $scope.nouns = dictionary.nouns;
 
   $scope.sentence = new nounUtilities.transitiveSentence($scope);
@@ -35,52 +35,55 @@ app.controller('sentenceController', [
     return input.join('');
   };
   $scope.getHelp = function(noun, bool){
-    //catch the prepositions
-    if(noun === this.sentence.placeWhere.prep){
-      noun = this.sentence.placeWhere;
-    }
+      console.log(this);
 
-    //catch the endings
-      var checkEnding = this.sentence.english.filter(function(v){
-        return v.ending == noun;
-      });
 
-    //catch the stems
-    if(typeof noun === 'string'){
-        noun = this.sentence.english.filter(function(v){
-          return v.stem == noun;
-        })[0];
-    }
-
-    //catch the endings
-    //they start out as undefined from catch the stems
-    var isEnding = false;
-    if(noun === undefined){
-      isEnding = true;
-      stem = this.$$prevSibling.nounPart;
-      endingInfo = this.sentence.english.filter(function(v){
-        return v.stem == stem;
-      })[0];
-      var noun = {};
-      noun.gender = endingInfo.gender;
-      noun.number = endingInfo.number;
-      noun.case = endingInfo.case;
-      noun.declension = endingInfo.declension;
-    }
-
-    $scope.help = isEnding === true ? noun : noun.noun;
-
-    //set visibility of the card
-    $scope.helperText = {
-      "visibility" : 'hidden'
-    };
-    if (bool) {
-      $scope.helperText = {
-        "visibility" : 'visable'
-      };
-    }
+    // //catch the prepositions
+    // if(noun === this.sentence.placeWhere.prep){
+    //   noun = this.sentence.placeWhere;
+    // }
+    //
+    // //catch the endings
+    //   var checkEnding = this.sentence.english.filter(function(v){
+    //     return v.ending == noun;
+    //   });
+    //
+    // //catch the stems
+    // if(typeof noun === 'string'){
+    //     noun = this.sentence.english.filter(function(v){
+    //       return v.stem == noun;
+    //     })[0];
+    // }
+    //
+    // //catch the endings
+    // //they start out as undefined from catch the stems
+    // var isEnding = false;
+    // if(noun === undefined){
+    //   isEnding = true;
+    //   stem = this.$$prevSibling.nounPart;
+    //   endingInfo = this.sentence.english.filter(function(v){
+    //     return v.stem == stem;
+    //   })[0];
+    //   var noun = {};
+    //   noun.gender = endingInfo.gender;
+    //   noun.number = endingInfo.number;
+    //   noun.case = endingInfo.case;
+    //   noun.declension = endingInfo.declension;
+    // }
+    //
+    // $scope.help = isEnding === true ? noun : noun.noun;
+    //
+    // //set visibility of the card
+    // $scope.helperText = {
+    //   "visibility" : 'hidden'
+    // };
+    // if (bool) {
+    //   $scope.helperText = {
+    //     "visibility" : 'visable'
+    //   };
+    // }
   };
-  $scope.latinStyle = {'visibility' : 'hidden'};
+//  $scope.latinStyle = {'visibility' : 'hidden'};
   $scope.buttonText = 'Show Answer';
 
 

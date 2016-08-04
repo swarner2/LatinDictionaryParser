@@ -1,13 +1,13 @@
 <div id="sentenceGen" class="container">
   <div class="row">
     <h1  class="text-center sentence">
-      <span class='word' ng-repeat="noun in sentence.english" ng-mouseenter="getHelp(noun, true)" ng-mouseleave="getHelp(noun, false)" >{{noun.meaning }}</span>
+      <span class='word' ng-repeat="word in sentence.english" ng-mouseenter="getHelp(word, true)" ng-mouseleave="getHelp(word, false)" >{{word.stem.english }}</span>
     </h1>
 
     <h1 id="answerSentence" class="text-center sentence" ng-style='answerStyle'>{{test(searchText)}}</h1>
 
     <h1 id="latinSentence" ng-style='latinStyle' class="text-center sentence">
-      <span class='word' ng-repeat="nounPart in sentence.latin" ng-mouseenter="getHelp(nounPart, true)" ng-mouseleave="getHelp(nounPart, false)" >{{nounPart}}</span>
+      <span class='word' ng-repeat="word in sentence.latin" ng-mouseenter="getHelp(word, true)" ng-mouseleave="getHelp(word, false)" >{{word.latin}}</span>
     </h1>
 
     <helper-text></helper-text>
