@@ -34,7 +34,6 @@ app.controller('sentenceController', [
     }
     return input.join('');
   };
-
   $scope.getHelp = function(noun, bool){
     //catch the prepositions
     if(noun === this.sentence.placeWhere.prep){

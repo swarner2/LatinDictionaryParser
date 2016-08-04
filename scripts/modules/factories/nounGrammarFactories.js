@@ -124,7 +124,6 @@ function Verb(type, subjectNumber, tense , voice, person){
 }
 
 var newVerb = new Verb('t', utilities.random(['sg','pl']),'present', 'active');
-console.log(newVerb);
 
 nounUtilities.transitiveSentence = function(){
   this.subject = subject();
