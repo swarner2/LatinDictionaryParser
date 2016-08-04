@@ -6,6 +6,7 @@ app.config(['$routeProvider', function($routeProvider){
     });
 }]);
 
-app.controller('vocabularyController',['$scope', function($scope){
-  
+app.controller('vocabularyController',['$scope','cards', function($scope, cards){
+  // $scope.usedVerbs = dictionary.verbs;
+  $scope.words = cards.getCards([dictionary.nouns, dictionary.verbs]);
 }]);
