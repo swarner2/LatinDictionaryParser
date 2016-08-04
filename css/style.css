@@ -79,8 +79,3 @@ text-shadow: 1px 5px 13px black;
 .word:hover{
   text-shadow: 2px 2px 10px red;
 }
-
-#submitButton{
-  margin-bottom: 30px;
-  margin-left: -6px;
-}
