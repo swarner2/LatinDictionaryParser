@@ -34,6 +34,35 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     }
   };
 
+  function getNounEnglish(that){
+    var englishExceptions = {
+      'fish' : 'fish ',
+      'ox' : 'oxen ',
+      'wolf' : 'wolves ',
+      'sheep' : 'sheep ',
+      'wife' : 'wives ',
+    };
+    if (that.ending.number === 'sg') {
+      that.stem.english =  ' the ' + that.stem.english + ' ';
+    }
+    else if (that.stem.english in englishExceptions) {
+      that.stem.english = englishExceptions[that.stem.english];
+    }
+    else if (that.stem.english.match(/y$/)) {
+      that.stem.english = ' the ' + that.stem.english.replace('y', 'ies ');
+    }
+    else if (that.stem.english.match(/s$/)) {
+      that.stem.english = ' the ' + that.stem.english.replace(/s$/, 'ses ');
+    }
+    else if (that.stem.english.match(/man$/)  && that.stem.english !== 'human') {
+      that.stem.english = ' the ' + that.stem.english.replace('man', 'men ');
+    }
+
+    else{
+      that.stem.english = ' the ' + that.stem.english + 's ';
+    }
+  }
+
  function NounCaseUse(nounCase, types, custom){
    this.noun = pickWord(types, 'nouns');
 
@@ -47,12 +76,12 @@ app.factory('nounUtilities', ['utilities',function(utilities){
      declension : this.noun.declension,
      latin : this.noun.stem,
    };
-   this.stem.english = this.ending.number === 'sg' ? ' the ' + this.stem.english + ' ' : ' the ' + this.stem.english + 's ';
 
    if(this.stem.gender === 'C'){this.stem.gender = utilities.random(['M','F']);}
    this.ending.latin = grammar[this.ending.case][this.ending.number][this.stem.declension + this.stem.gender] + " ";
 
    var that = this;
+   getNounEnglish(that);
    custom(that);
 
   //catch if ending is 'firstDict'
