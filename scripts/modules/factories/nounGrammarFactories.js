@@ -112,8 +112,14 @@ function Verb(type, subjectNumber, tense , voice, person){
   }
 
   //change english if plural
-  if(this.stem.number === 'sg'){
-    this.stem.english = this.stem.english + "s ";
+  if(this.ending.number === 'sg'){
+    //check if compound verb in english
+    if (this.stem.english.match(' ')) {
+      this.stem.english = this.stem.english.replace(' ', 's ');
+    }
+    else {
+      this.stem.english = this.stem.english + "s ";
+    }
   }
   //get ending
   this.ending.personalEnding = grammar.verbs.personalEndings[this.stem.tense][this.ending.voice][this.ending.person + "Person"  + this.ending.number];
