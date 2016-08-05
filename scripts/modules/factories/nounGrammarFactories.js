@@ -44,6 +44,7 @@ app.factory('nounUtilities', ['utilities',function(utilities){
       'joy' : 'joys',
       'valley' : 'valleys',
       'children' : 'children',
+      'person' : 'people',
     };
     if (that.ending.number === 'sg') {
       that.stem.english =  ' the ' + that.stem.english + ' ';
@@ -67,7 +68,12 @@ app.factory('nounUtilities', ['utilities',function(utilities){
   }
 
  function NounCaseUse(nounCase, types, custom){
-   this.noun = pickWord(types, 'nouns');
+   //handle types
+   type = utilities.random(types).trim();
+   if(type === 'thing'){
+     type = utilities.random(['instrument', 'food', 'body part','jewelry','material','event']);
+   }
+   this.noun = pickWord(type, 'nouns');
 
    this.ending = {
      case : nounCase,
@@ -112,8 +118,8 @@ app.factory('nounUtilities', ['utilities',function(utilities){
     });
   };
 
-  directObject = function(){
-    return new NounCaseUse('accusative','any',function(){});
+  directObject = function(types){
+    return new NounCaseUse('accusative', types ,function(){});
   };
 
 function Verb(type, subjectNumber, tense , voice, person){
@@ -186,7 +192,7 @@ nounUtilities.transitiveSentence = function(){
   this.subject = subject();
   this.verb = new Verb('t', this.subject.ending.number ,'present', 'active');
   this.placeWhere = placeWhere();
-  this.directObject = directObject();
+  this.directObject = directObject(this.verb.verb.directObjectTypes);
   this.english = [this.subject, this.verb, this.directObject, this.placeWhere ];
   this.latin = [
     this.subject.stem, this.subject.ending,

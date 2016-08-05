@@ -1,4 +1,4 @@
-function Verb(definition, dictionaryEntry, type, chapter, section){
+function Verb(definition, dictionaryEntry, type, chapter, section, directObjectTypes){
 
   this.chapter = chapter.replace(/(\s\s)*/g, '').trim();
   this.section = section;
@@ -6,6 +6,7 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   this.types = type.replace(/(\s\s)*/g, '').trim();
   this.deponent = false;
   this.dictionaryEntry = dictionaryEntry.replace(/(\s\s)*/g, '').trim();
+  this.directObjectTypes = directObjectTypes.trim().split(',');
   //dictionary entry parsing
 
   //check for 1st conjugation short-hand
@@ -21,7 +22,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
       }
     }).join(', ');
   }
-
   //capture special cases
   var findTrailingCase = new RegExp("(?:us\\s)(\\w\\w\\w)$");
   if (this.dictionaryEntry.match(findTrailingCase)) {
@@ -36,6 +36,10 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
 
   var firstEnding = dictionaryEntry.match(/(eo,\s)|(io,\s)|(o,\s)|(eor,\s)|(ior,\s)|(or,\s)/i)[0].replace(", ", "");
   var secondEnding = dictionaryEntry.match(/(ere,\s)|(ire,\s)|(are,\s)|(ari,\s)|(eri,\s)|(i,\s)/i)[0].replace(", ", "");
+  //fix strange first conjugations
+  if(secondEnding === 'are'){
+    firstEnding = 'o';
+  }
 
   switch (firstEnding + " : " + secondEnding) {
     case 'o : are':
@@ -83,7 +87,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
     default:
      console.log(this.dictionaryEntry + "is irregular or didn't pass through conjugation logic");
   }
-
   //present stem
   var findPresentStem = new RegExp('(?:,\\s)(\\w*)(?=' + secondEnding + ',)');
   this.presentStem = this.dictionaryEntry.match(findPresentStem)[1];
@@ -106,17 +109,17 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
     this.participleStem = this.dictionaryEntry.match(findParticipleStem)[1];
   }
 
-  function test(x){
+  function test(x, testName){
   	if(x === undefined){
-  		console.log('failed test: ' + this.dictionaryEntry);
+  		console.log('failed ' + testName + ": " + this.dictionaryEntry);
   		self.meaning = 'something was not defined, check how you entered the data for this word to fix it';
   	}
   }
-  test(this.presentStem);
-  test(this.perfectStem);
-  test(this.participleStem);
-  test(this.meaning);
-  test(this.conjugation);
-  test(this.types);
+  test(this.presentStem, 'present stem');
+  test(this.perfectStem, 'perfect stem');
+  test(this.participleStem, 'participle stem');
+  test(this.meaning, 'meaning');
+  test(this.conjugation, 'conjugation');
+  test(this.types, 'types');
 
 }
