@@ -41,6 +41,9 @@ app.factory('nounUtilities', ['utilities',function(utilities){
       'wolf' : 'wolves ',
       'sheep' : 'sheep ',
       'wife' : 'wives ',
+      'joy' : 'joys',
+      'valley' : 'valleys',
+      'children' : 'children',
     };
     if (that.ending.number === 'sg') {
       that.stem.english =  ' the ' + that.stem.english + ' ';
@@ -130,8 +133,8 @@ function Verb(type, subjectNumber, tense , voice, person){
   if (person === undefined) { this.ending.person = 'third';}
 
   //pick one of the englishs but clean it first
-  if (this.stem.english.match(/;|:/)) {
-    this.stem.english = this.stem.english.replace(/;|:/g, ',');
+  if (this.stem.english.match(/;|:|\//)) {
+    this.stem.english = this.stem.english.replace(/;|:|\//g, ',');
   }
   this.stem.english = utilities.random(this.stem.english.split(', '));
 

@@ -458,7 +458,7 @@ dictionary = {
       new Noun	("	statue, sign	","	signum, -i	",["	art	"], "	XVIIII	",	1	),
       new Noun	("	silence	","	silentium, -i	",["	sound	"], "	XX	",	3	),
       new Noun	("	wood, forest	","	silva, -ae	",["	place	"], "	VIIII	",	1	),
-      new Noun	("	really, however, but	","	sinistra, -ae	",["	place	"], "	XVI	",	2	),
+      new Noun	("	left-side	","	sinistra, -ae	",["	place	"], "	XVI	",	2	),
       new Noun	("	fold (of toga)	","	sinus, -us	",["	clothing	"], "	XXXIIII	",	3	),
       new Noun	("	thirst	","	sitis, sitis F	",["	life	"], "	XXX	",	2	),
       new Noun	("	sun	","	sol, solis (m)	",["	nature	"], "	VIIII	",	1	),

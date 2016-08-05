@@ -6,7 +6,6 @@ function Verb(definition, dictionaryEntry, type, chapter, section){
   this.types = type.replace(/(\s\s)*/g, '').trim();
   this.deponent = false;
   this.dictionaryEntry = dictionaryEntry.replace(/(\s\s)*/g, '').trim();
-
   //dictionary entry parsing
 
   //check for 1st conjugation short-hand
