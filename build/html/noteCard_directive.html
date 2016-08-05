@@ -1,7 +1,6 @@
     <ul>
       <li class="container" ng-repeat="word in words | filter:$parent.searchText | limitTo:20 | orderBy:dictionaryEntry" >
         <div class="row">
-
           <h4 class="col-xs-12">
             <b>{{word.dictionaryEntry + ": "}}</b><i> {{word.meaning}}</i>
           </h4>
